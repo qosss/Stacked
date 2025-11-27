@@ -16,9 +16,24 @@ export function NetWorthInput({
   error,
 }: NetWorthInputProps) {
   const formatNetWorthInput = (val: string) => {
-    const cleaned = val.replace(/[^0-9]/g, "");
+    // Allow digits and decimal point
+    const cleaned = val.replace(/[^0-9.]/g, "");
     if (!cleaned) return "";
-    return cleaned.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Split into integer and decimal parts
+    const parts = cleaned.split(".");
+    const integerPart = parts[0];
+    const decimalPart = parts[1];
+
+    // Format integer part with commas
+    const formattedInteger = parseInt(integerPart || "0").toLocaleString("en-US");
+
+    // Return with decimal if present (limit to 2 digits)
+    if (decimalPart !== undefined) {
+      return `${formattedInteger}.${decimalPart.slice(0, 2)}`;
+    }
+
+    return formattedInteger;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +42,7 @@ export function NetWorthInput({
     onChange(formatted);
   };
 
-  const numericValue = parseInt(value.replace(/,/g, ""));
+  const numericValue = parseFloat(value.replace(/,/g, ""));
   const isValid = !isNaN(numericValue) && numericValue > 0;
 
   return (
@@ -41,7 +56,7 @@ export function NetWorthInput({
         </span>
         <Input
           type="text"
-          placeholder="1,000,000"
+          placeholder="1,000,000.00"
           value={value}
           onChange={handleChange}
           disabled={disabled}

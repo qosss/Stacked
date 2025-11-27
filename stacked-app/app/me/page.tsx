@@ -144,6 +144,14 @@ export default function DashboardPage() {
             </p>
           </div>
 
+          {/* Account Settings Placeholder */}
+          <div className="bg-background-lighter border border-border rounded-lg p-6 mb-8">
+            <h3 className="text-lg font-bold font-display mb-2">Account Settings</h3>
+            <p className="text-text-muted text-sm">
+              Coming soon: Manage your account preferences, notifications, and privacy settings
+            </p>
+          </div>
+
           {/* Actions */}
           <div className="space-y-2">
             <Button

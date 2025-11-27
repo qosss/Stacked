@@ -57,11 +57,11 @@
 - [x] Step 3: Username selection
   - [x] Real-time availability check (mock for now)
   - [x] Username format validation (lowercase, 3-20 chars, a-z0-9_)
-  - [ ] "Usernames are permanent" warning
+  - [x] "Usernames are permanent" warning
 - [x] Step 4: Net worth entry
   - [x] Currency input with formatting
   - [x] Allow negative values
-  - [ ] Cents precision
+  - [x] Cents precision
 - [x] Success state → redirect to homepage with banner
 
 ### 2.4 Profile Page `/u/[username]`
@@ -82,7 +82,7 @@
 - [x] Current net worth display
 - [x] "Update Net Worth" button → modal
 - [x] Net worth history list (simple, chronological)
-- [ ] Account settings section (placeholder)
+- [x] Account settings section (placeholder)
 
 ---
 

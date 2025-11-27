@@ -79,6 +79,7 @@ export function UsernameInput({
         </p>
       )}
       <p className="text-text-muted text-xs mt-1">3-20 characters, letters and numbers only</p>
+      <p className="text-warning text-xs mt-2 font-medium">⚠️ Usernames are permanent and cannot be changed</p>
     </div>
   );
 }
