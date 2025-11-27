@@ -1,0 +1,64 @@
+"use client";
+
+import { User, formatNetWorth, getUserRank } from "@/lib/data/users";
+import { Tag } from "@/components/ui/tag";
+import { Avatar } from "@/components/ui/avatar";
+
+interface LeaderboardRowProps {
+  user: User;
+  isCurrentUser?: boolean;
+  onProfile?: (user: User) => void;
+}
+
+export function LeaderboardRow({
+  user,
+  isCurrentUser,
+  onProfile,
+}: LeaderboardRowProps) {
+  const rank = getUserRank(user.id);
+
+  const getRankColor = (rank: number) => {
+    if (rank === 1) return "text-accent";
+    if (rank === 2) return "text-gray-400";
+    if (rank === 3) return "text-orange-500";
+    return "text-text-muted";
+  };
+
+  const handleClick = () => {
+    if (onProfile) {
+      onProfile(user);
+    }
+  };
+
+  return (
+    <tr
+      className={`border-b border-border hover:bg-background-lighter transition-colors cursor-pointer ${
+        isCurrentUser ? "bg-background-lighter" : ""
+      }`}
+      onClick={handleClick}
+    >
+      <td className="px-6 py-4 text-sm font-bold text-center">
+        <span className={getRankColor(rank)}># {rank}</span>
+      </td>
+      <td className="px-6 py-4">
+        <div className="flex items-center gap-3">
+          <Avatar size="sm" initial={user.username.charAt(0).toUpperCase()} />
+          <div>
+            <p className="font-medium text-text">{user.username}</p>
+            <p className="text-xs text-text-muted">{user.phone}</p>
+          </div>
+        </div>
+      </td>
+      <td className="px-6 py-4 text-right">
+        <p className="font-bold text-accent">{formatNetWorth(user.netWorth)}</p>
+      </td>
+      <td className="px-6 py-4 text-right">
+        <div className="flex justify-end gap-2">
+          {user.isOG && <Tag variant="og">OG</Tag>}
+          {user.isEarly && <Tag variant="early">Early</Tag>}
+          {isCurrentUser && <Tag variant="you">You</Tag>}
+        </div>
+      </td>
+    </tr>
+  );
+}

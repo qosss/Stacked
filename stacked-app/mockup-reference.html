@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STACKED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: #0d0d0d;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+            animation: fadeDown 0.5s ease;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .logo:hover {
+            color: #c8ff00;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 3px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #666;
+            border: 1px solid #333;
+        }
+
+        .btn-ghost:hover {
+            border-color: #c8ff00;
+            color: #c8ff00;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: #c8ff00;
+            color: #0d0d0d;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(200, 255, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            background: #d4ff33;
+            box-shadow: 0 4px 20px rgba(200, 255, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(200, 255, 0, 0.15);
+        }
+
+        /* User menu */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-menu-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #1a1a1a;
+            border: 1px solid #282828;
+            padding: 0.4rem 0.8rem 0.4rem 0.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .user-menu-btn:hover {
+            border-color: #333;
+            background: #1f1f1f;
+        }
+
+        .user-menu-btn .avatar {
+            width: 28px;
+            height: 28px;
+            background: #252525;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: #c8ff00;
+        }
+
+        .user-menu-btn .name {
+            font-size: 0.75rem;
+            color: #ccc;
+        }
+
+        .user-menu-btn svg {
+            width: 12px;
+            height: 12px;
+            color: #555;
+            transition: transform 0.2s ease;
+        }
+
+        .user-menu-btn.open svg {
+            transform: rotate(180deg);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            background: #1a1a1a;
+            border: 1px solid #282828;
+            border-radius: 6px;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .user-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #282828;
+        }
+
+        .dropdown-header .rank-badge {
+            font-size: 0.6rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .dropdown-header .networth {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            font-size: 0.75rem;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .dropdown-item:hover {
+            background: #222;
+            color: #fff;
+        }
+
+        .dropdown-item svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .dropdown-item.danger {
+            color: #ff4444;
+        }
+
+        .dropdown-item.danger:hover {
+            background: rgba(255, 68, 68, 0.1);
+        }
+
+        /* Your rank banner */
+        .rank-banner {
+            background: linear-gradient(90deg, rgba(200, 255, 0, 0.08) 0%, transparent 100%);
+            border-bottom: 1px solid #222;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .rank-banner-text {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .rank-banner-text strong {
+            color: #c8ff00;
+            font-weight: 700;
+        }
+
+        .rank-banner .btn {
+            font-size: 0.7rem;
+            padding: 0.5rem 1rem;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 2rem;
+            border-bottom: 1px solid #222;
+            animation: fadeUp 0.7s ease;
+        }
+
+        .stat {
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            color: #555;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        /* Leaderboard */
+        .leaderboard {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .leaderboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s ease;
+        }
+
+        .leaderboard-title {
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        select {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            background: #1a1a1a;
+            color: #888;
+            border: 1px solid #333;
+            padding: 0.4rem 0.8rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        select:hover {
+            border-color: #555;
+            color: #ccc;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #c8ff00;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #222;
+        }
+
+        th:nth-child(3) { text-align: right; }
+        th:nth-child(4) { text-align: center; }
+
+        tbody tr {
+            border-bottom: 1px solid #1a1a1a;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            animation: fadeIn 0.4s ease backwards;
+        }
+
+        tbody tr:nth-child(1) { animation-delay: 0.1s; }
+        tbody tr:nth-child(2) { animation-delay: 0.15s; }
+        tbody tr:nth-child(3) { animation-delay: 0.2s; }
+        tbody tr:nth-child(4) { animation-delay: 0.25s; }
+        tbody tr:nth-child(5) { animation-delay: 0.3s; }
+        tbody tr:nth-child(6) { animation-delay: 0.35s; }
+        tbody tr:nth-child(7) { animation-delay: 0.4s; }
+        tbody tr:nth-child(8) { animation-delay: 0.45s; }
+        tbody tr:nth-child(9) { animation-delay: 0.5s; }
+        tbody tr:nth-child(10) { animation-delay: 0.55s; }
+
+        tbody tr:hover {
+            background: #161616;
+            transform: translateX(4px);
+        }
+
+        tbody tr:hover .username {
+            color: #c8ff00;
+        }
+
+        tbody tr:hover .avatar {
+            background: #252525;
+            box-shadow: 0 0 12px rgba(200, 255, 0, 0.15);
+        }
+
+        tbody tr:active {
+            background: #1a1a1a;
+        }
+
+        /* Current user row */
+        tbody tr.current-user {
+            background: rgba(200, 255, 0, 0.05);
+            border-left: 2px solid #c8ff00;
+        }
+
+        tbody tr.current-user:hover {
+            background: rgba(200, 255, 0, 0.08);
+        }
+
+        tbody tr.current-user .username {
+            color: #c8ff00;
+        }
+
+        tbody tr.current-user .you-badge {
+            display: inline-block;
+        }
+
+        .you-badge {
+            display: none;
+            font-size: 0.55rem;
+            padding: 0.15rem 0.35rem;
+            background: #c8ff00;
+            color: #0d0d0d;
+            border-radius: 2px;
+            margin-left: 0.5rem;
+            font-weight: 700;
+        }
+
+        td {
+            padding: 1rem;
+            vertical-align: middle;
+        }
+
+        .rank {
+            font-size: 0.8rem;
+            color: #555;
+            width: 50px;
+            transition: transform 0.2s ease;
+        }
+
+        tr:hover .rank {
+            transform: scale(1.1);
+        }
+
+        .rank-1 { color: #ffd700; }
+        .rank-2 { color: #c0c0c0; }
+        .rank-3 { color: #cd7f32; }
+
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #c8ff00;
+            transition: all 0.25s ease;
+        }
+
+        .username {
+            color: #ccc;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .tag {
+            font-size: 0.55rem;
+            padding: 0.15rem 0.35rem;
+            background: #222;
+            color: #888;
+            border-radius: 2px;
+            margin-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        tr:hover .tag {
+            background: #2a2a2a;
+        }
+
+        .tag-og {
+            background: #332d00;
+            color: #ffd700;
+        }
+
+        tr:hover .tag-og {
+            background: #443d00;
+        }
+
+        .networth {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #fff;
+            transition: all 0.2s ease;
+        }
+
+        tr:hover .networth {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .networth.negative {
+            color: #ff4444;
+        }
+
+        .cents {
+            color: #555;
+            font-size: 0.75rem;
+        }
+
+        .status {
+            text-align: center;
+            font-size: 0.6rem;
+            color: #444;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #222;
+            margin-top: 2rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #444;
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #c8ff00;
+        }
+
+        .footer-note {
+            font-size: 0.65rem;
+            color: #333;
+        }
+
+        /* Modal */
+        .modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(0px);
+        }
+
+        .modal-bg.open {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-wrapper {
+            position: relative;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal-bg.open .modal-wrapper {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .modal {
+            background: #141414;
+            border: 1px solid #282828;
+            padding: 2rem;
+            width: 100%;
+            max-width: 360px;
+            border-radius: 6px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .modal-sub {
+            color: #555;
+            font-size: 0.75rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal label {
+            display: block;
+            font-size: 0.65rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+        }
+
+        .modal input {
+            width: 100%;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            padding: 0.75rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: #fff;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .modal input:hover {
+            border-color: #444;
+        }
+
+        .modal input:focus {
+            outline: none;
+            border-color: #c8ff00;
+            box-shadow: 0 0 0 3px rgba(200, 255, 0, 0.1);
+        }
+
+        .modal input::placeholder {
+            color: #444;
+        }
+
+        .modal .btn {
+            width: 100%;
+            padding: 0.75rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: #1a1a1a;
+            border: 1px solid #282828;
+            color: #555;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: #222;
+            color: #fff;
+            border-color: #333;
+            transform: rotate(90deg);
+        }
+
+        /* Current value display */
+        .current-value {
+            background: #1a1a1a;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .current-value-label {
+            font-size: 0.6rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .current-value-amount {
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        /* Profile modal */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-avatar {
+            width: 56px;
+            height: 56px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: #c8ff00;
+            margin: 0 auto 1rem;
+            box-shadow: 0 0 20px rgba(200, 255, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .modal-bg.open .profile-avatar {
+            animation: pulse 2s ease infinite;
+        }
+
+        .profile-name {
+            font-size: 1rem;
+            color: #888;
+        }
+
+        .profile-name span {
+            color: #fff;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-stat {
+            text-align: center;
+        }
+
+        .profile-stat-label {
+            font-size: 0.6rem;
+            color: #444;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-stat-value {
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeUp {
+            from { 
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(200, 255, 0, 0.1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(200, 255, 0, 0.2);
+            }
+        }
+
+        /* Ripple effect for buttons */
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.3s ease;
+        }
+
+        .btn:active::after {
+            transform: scale(2);
+            opacity: 1;
+            transition: transform 0s, opacity 0s;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .stats { gap: 1.5rem; flex-wrap: wrap; }
+            th:nth-child(4), td:nth-child(4) { display: none; }
+            .avatar { display: none; }
+            .rank-banner { 
+                flex-direction: column; 
+                gap: 0.75rem;
+                text-align: center;
+            }
+            tbody tr:hover {
+                transform: none;
+            }
+            .user-menu-btn .name {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">STACKED</div>
+        <div class="header-actions">
+            <button class="btn btn-primary" onclick="openModal('update')">Update Net Worth</button>
+            <div class="user-menu">
+                <button class="user-menu-btn" onclick="toggleDropdown()">
+                    <div class="avatar">F</div>
+                    <span class="name">@frugal_fire</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+                <div class="user-dropdown" id="user-dropdown">
+                    <div class="dropdown-header">
+                        <div class="rank-badge">Rank #8</div>
+                        <div class="networth">$4,892,103.84</div>
+                    </div>
+                    <div class="dropdown-item" onclick="openModal('update')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                        Update Net Worth
+                    </div>
+                    <div class="dropdown-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4M12 8h.01"/>
+                        </svg>
+                        View Profile
+                    </div>
+                    <div class="dropdown-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 15v2m0 0v2m0-2h2m-2 0H10"/>
+                            <rect x="3" y="4" width="18" height="12" rx="2"/>
+                        </svg>
+                        Connect Accounts
+                    </div>
+                    <div class="dropdown-item danger" onclick="logout()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+                        </svg>
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Rank Banner -->
+    <div class="rank-banner">
+        <span class="rank-banner-text">You're currently ranked <strong>#8</strong> on the leaderboard</span>
+        <button class="btn btn-ghost" onclick="openModal('update')">Update</button>
+    </div>
+
+    <section class="stats">
+        <div class="stat">
+            <div class="stat-value">2,847</div>
+            <div class="stat-label">Members</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">$4.2B</div>
+            <div class="stat-label">Total</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">$1.48M</div>
+            <div class="stat-label">Median</div>
+        </div>
+    </section>
+
+    <main class="leaderboard">
+        <div class="leaderboard-header">
+            <span class="leaderboard-title">Top 100</span>
+            <select>
+                <option>Net Worth</option>
+                <option>Last Updated</option>
+                <option>Newest</option>
+            </select>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User</th>
+                    <th>Net Worth</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr onclick="openProfile('satoshi_n', 'S', '$68,421,053,291.00', '#1')">
+                    <td class="rank rank-1">1</td>
+                    <td><div class="user"><div class="avatar">S</div><span class="username">@satoshi_n</span><span class="tag tag-og">OG</span></div></td>
+                    <td class="networth">$68,421,053,291<span class="cents">.00</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+                <tr onclick="openProfile('vitalik', 'V', '$1,892,450,000.00', '#2')">
+                    <td class="rank rank-2">2</td>
+                    <td><div class="user"><div class="avatar">V</div><span class="username">@vitalik</span><span class="tag tag-og">OG</span></div></td>
+                    <td class="networth">$1,892,450,000<span class="cents">.00</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+                <tr onclick="openProfile('techfounder_maya', 'M', '$542,891,203.47', '#3')">
+                    <td class="rank rank-3">3</td>
+                    <td><div class="user"><div class="avatar">M</div><span class="username">@techfounder_maya</span><span class="tag tag-og">OG</span></div></td>
+                    <td class="networth">$542,891,203<span class="cents">.47</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+                <tr onclick="openProfile('defi_whale', 'D', '$127,845,921.83', '#4')">
+                    <td class="rank">4</td>
+                    <td><div class="user"><div class="avatar">D</div><span class="username">@defi_whale</span></div></td>
+                    <td class="networth">$127,845,921<span class="cents">.83</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+                <tr onclick="openProfile('sarah_builds', 'S', '$89,234,102.00', '#5')">
+                    <td class="rank">5</td>
+                    <td><div class="user"><div class="avatar">S</div><span class="username">@sarah_builds</span></div></td>
+                    <td class="networth">$89,234,102<span class="cents">.00</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+                <tr onclick="openProfile('anon_trader', 'A', '$34,521,847.29', '#6')">
+                    <td class="rank">6</td>
+                    <td><div class="user"><div class="avatar">A</div><span class="username">@anon_trader</span></div></td>
+                    <td class="networth">$34,521,847<span class="cents">.29</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+                <tr onclick="openProfile('money_mike', 'M', '$12,847,392.15', '#7')">
+                    <td class="rank">7</td>
+                    <td><div class="user"><div class="avatar">M</div><span class="username">@money_mike</span></div></td>
+                    <td class="networth">$12,847,392<span class="cents">.15</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+                <tr class="current-user" onclick="openProfile('frugal_fire', 'F', '$4,892,103.84', '#8')">
+                    <td class="rank">8</td>
+                    <td><div class="user"><div class="avatar">F</div><span class="username">@frugal_fire</span><span class="you-badge">YOU</span></div></td>
+                    <td class="networth">$4,892,103<span class="cents">.84</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+                <tr onclick="openProfile('coastfire_jen', 'J', '$1,284,921.00', '#9')">
+                    <td class="rank">9</td>
+                    <td><div class="user"><div class="avatar">J</div><span class="username">@coastfire_jen</span></div></td>
+                    <td class="networth">$1,284,921<span class="cents">.00</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+                <tr onclick="openProfile('student_debt_dan', 'D', '-$84,291.33', '#10')">
+                    <td class="rank">10</td>
+                    <td><div class="user"><div class="avatar">D</div><span class="username">@student_debt_dan</span></div></td>
+                    <td class="networth negative">-$84,291<span class="cents">.33</span></td>
+                    <td class="status">Unverified</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">FAQ</a>
+        </div>
+        <p class="footer-note">All values self-reported. Verification coming soon.</p>
+    </footer>
+
+    <!-- Update Net Worth Modal -->
+    <div class="modal-bg" id="modal-update" onclick="closeModal(event, 'update')">
+        <div class="modal-wrapper" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModalDirect('update')">×</button>
+            <div class="modal">
+                <div class="modal-title">Update Net Worth</div>
+                <div class="modal-sub">Enter your current total net worth</div>
+                
+                <div class="current-value">
+                    <div class="current-value-label">Current Value</div>
+                    <div class="current-value-amount">$4,892,103.84</div>
+                </div>
+
+                <label>New Net Worth (USD)</label>
+                <input type="text" placeholder="$5,000,000.00" value="$4,892,103.84">
+                <button class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal-bg" id="modal-profile" onclick="closeModal(event, 'profile')">
+        <div class="modal-wrapper" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModalDirect('profile')">×</button>
+            <div class="modal">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="p-avatar">S</div>
+                    <div class="profile-name">@<span id="p-name">satoshi_n</span></div>
+                </div>
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="profile-stat-label">Net Worth</div>
+                        <div class="profile-stat-value" id="p-worth">$68B</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-label">Rank</div>
+                        <div class="profile-stat-value" id="p-rank">#1</div>
+                    </div>
+                </div>
+                <div class="status" style="margin-top: 1rem;">Unverified</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(type) {
+            document.getElementById('modal-' + type).classList.add('open');
+            document.body.style.overflow = 'hidden';
+            closeDropdown();
+        }
+
+        function closeModal(e, type) {
+            if (e.target === e.currentTarget) {
+                document.getElementById('modal-' + type).classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeModalDirect(type) {
+            document.getElementById('modal-' + type).classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function openProfile(name, initial, worth, rank) {
+            document.getElementById('p-name').textContent = name;
+            document.getElementById('p-avatar').textContent = initial;
+            document.getElementById('p-worth').textContent = worth;
+            document.getElementById('p-rank').textContent = rank;
+            openModal('profile');
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            const btn = document.querySelector('.user-menu-btn');
+            dropdown.classList.toggle('open');
+            btn.classList.toggle('open');
+        }
+
+        function closeDropdown() {
+            document.getElementById('user-dropdown').classList.remove('open');
+            document.querySelector('.user-menu-btn').classList.remove('open');
+        }
+
+        function logout() {
+            closeDropdown();
+            alert('Logged out! (This is a mockup)');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.user-menu')) {
+                closeDropdown();
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-bg.open').forEach(m => {
+                    m.classList.remove('open');
+                });
+                document.body.style.overflow = '';
+                closeDropdown();
+            }
+        });
+    </script>
+</body>
+</html>

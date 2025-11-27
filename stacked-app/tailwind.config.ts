@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -11,53 +11,68 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+        background: {
+          deep: "#0d0d0d",
+          card: "#141414",
+          elevated: "#1a1a1a",
+          hover: "#1f1f1f",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+        text: {
+          primary: "#e0e0e0",
+          secondary: "#888888",
+          muted: "#555555",
+          inverse: "#0d0d0d",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "#c8ff00",
+          hover: "#d4ff33",
+          dim: "rgba(200, 255, 0, 0.15)",
+          glow: "rgba(200, 255, 0, 0.3)",
         },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+        negative: "#ff4444",
+        positive: "#4caf50",
+        warning: "#ff9800",
+        border: {
+          DEFAULT: "#222222",
+          light: "#333333",
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+        rank: {
+          gold: "#ffd700",
+          silver: "#c0c0c0",
+          bronze: "#cd7f32",
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      fontFamily: {
+        display: ["var(--font-syne)", "sans-serif"],
+        mono: ["var(--font-space-mono)", "monospace"],
+      },
+      animation: {
+        "fade-in": "fadeIn 0.4s ease",
+        "fade-up": "fadeUp 0.6s ease",
+        "fade-down": "fadeDown 0.5s ease",
+        "pulse-glow": "pulse 2s ease infinite",
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        fadeUp: {
+          from: { opacity: "0", transform: "translateY(10px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        fadeDown: {
+          from: { opacity: "0", transform: "translateY(-10px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        pulse: {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(200, 255, 0, 0.1)" },
+          "50%": { boxShadow: "0 0 30px rgba(200, 255, 0, 0.2)" },
+        },
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+};
+
+export default config;
