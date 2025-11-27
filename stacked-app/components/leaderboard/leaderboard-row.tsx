@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { User, formatNetWorth, getUserRank } from "@/lib/data/users";
 import { Tag } from "@/components/ui/tag";
 import { Avatar } from "@/components/ui/avatar";
@@ -8,12 +9,14 @@ interface LeaderboardRowProps {
   user: User;
   isCurrentUser?: boolean;
   onProfile?: (user: User) => void;
+  variants?: any;
 }
 
 export function LeaderboardRow({
   user,
   isCurrentUser,
   onProfile,
+  variants,
 }: LeaderboardRowProps) {
   const rank = getUserRank(user.id);
 
@@ -31,7 +34,10 @@ export function LeaderboardRow({
   };
 
   return (
-    <tr
+    <motion.tr
+      whileHover={{ x: 4 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      variants={variants}
       className={`border-b border-border hover:bg-background-lighter transition-colors cursor-pointer ${
         isCurrentUser ? "bg-background-lighter" : ""
       }`}
@@ -59,6 +65,6 @@ export function LeaderboardRow({
           {isCurrentUser && <Tag variant="you">You</Tag>}
         </div>
       </td>
-    </tr>
+    </motion.tr>
   );
 }

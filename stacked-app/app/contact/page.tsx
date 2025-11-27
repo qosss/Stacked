@@ -1,8 +1,10 @@
 import { StaticPageLayout } from "@/components/layout/static-page-layout";
+import { PageTransition } from "@/components/ui/page-transition";
 
 export default function ContactPage() {
   return (
-    <StaticPageLayout
+    <PageTransition>
+      <StaticPageLayout
       title="Get in Touch"
       breadcrumbs={[
         { label: "Home", href: "/" },
@@ -69,5 +71,6 @@ export default function ContactPage() {
         </div>
       </div>
     </StaticPageLayout>
+    </PageTransition>
   );
 }

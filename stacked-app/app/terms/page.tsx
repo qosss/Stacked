@@ -1,5 +1,6 @@
 import { StaticPageLayout } from "@/components/static/static-page-layout";
 import { Section } from "@/components/static/section";
+import { PageTransition } from "@/components/ui/page-transition";
 
 export const metadata = {
   title: "Terms of Service | STACKED",
@@ -8,7 +9,8 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <StaticPageLayout
+    <PageTransition>
+      <StaticPageLayout
       title="Terms of Service"
       lastUpdated="November 26, 2024"
       breadcrumbs={[
@@ -220,5 +222,6 @@ export default function TermsPage() {
         These Terms of Service are effective as of November 26, 2024. Last updated: November 26, 2024.
       </p>
     </StaticPageLayout>
+    </PageTransition>
   );
 }

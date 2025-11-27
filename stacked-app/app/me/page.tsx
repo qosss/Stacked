@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { NetWorthInput } from "@/components/auth/networth-input";
 import { Tag } from "@/components/ui/tag";
+import { PageTransition } from "@/components/ui/page-transition";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -77,7 +78,8 @@ export default function DashboardPage() {
         </Link>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
+      <PageTransition>
+        <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
         <div className="max-w-md w-full">
           {/* Welcome Banner */}
           <div className="bg-background-lighter border border-border rounded-lg p-6 mb-6">
@@ -168,7 +170,8 @@ export default function DashboardPage() {
             </Button>
           </div>
         </div>
-      </main>
+        </main>
+      </PageTransition>
 
       {/* Update Net Worth Modal */}
       <Modal isOpen={showUpdateModal} onClose={() => setShowUpdateModal(false)}>

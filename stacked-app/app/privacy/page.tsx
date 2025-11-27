@@ -1,8 +1,10 @@
 import { StaticPageLayout } from "@/components/layout/static-page-layout";
+import { PageTransition } from "@/components/ui/page-transition";
 
 export default function PrivacyPage() {
   return (
-    <StaticPageLayout
+    <PageTransition>
+      <StaticPageLayout
       title="Privacy Policy"
       lastUpdated="November 26, 2024"
       breadcrumbs={[
@@ -346,5 +348,6 @@ export default function PrivacyPage() {
         </section>
       </div>
     </StaticPageLayout>
+    </PageTransition>
   );
 }

@@ -2,6 +2,7 @@ import { getUserByUsername, getUserRank, formatNetWorth } from "@/lib/data/users
 import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
 import { Tag } from "@/components/ui/tag";
+import { PageTransition } from "@/components/ui/page-transition";
 
 interface ProfilePageProps {
   params: {
@@ -51,8 +52,9 @@ export default function ProfilePage({ params }: ProfilePageProps) {
         </Link>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-        <div className="max-w-md w-full">
+      <PageTransition>
+        <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
+          <div className="max-w-md w-full">
           {/* Profile Header */}
           <div className="text-center mb-8">
             <Avatar
@@ -117,8 +119,9 @@ export default function ProfilePage({ params }: ProfilePageProps) {
               Back to Leaderboard
             </Link>
           </div>
-        </div>
-      </main>
+          </div>
+        </main>
+      </PageTransition>
     </div>
   );
 }

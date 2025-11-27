@@ -1,5 +1,6 @@
 import { StaticPageLayout } from "@/components/static/static-page-layout";
 import { Accordion } from "@/components/static/accordion";
+import { PageTransition } from "@/components/ui/page-transition";
 
 export const metadata = {
   title: "FAQ | STACKED",
@@ -124,15 +125,17 @@ const faqItems = [
 
 export default function FAQPage() {
   return (
-    <StaticPageLayout
-      title="Frequently Asked Questions"
-      subtitle="Everything you need to know about STACKED"
-      breadcrumbs={[
-        { label: "Home", href: "/" },
-        { label: "FAQ", href: "/faq" },
-      ]}
-    >
-      <Accordion items={faqItems} />
-    </StaticPageLayout>
+    <PageTransition>
+      <StaticPageLayout
+        title="Frequently Asked Questions"
+        subtitle="Everything you need to know about STACKED"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "FAQ", href: "/faq" },
+        ]}
+      >
+        <Accordion items={faqItems} />
+      </StaticPageLayout>
+    </PageTransition>
   );
 }

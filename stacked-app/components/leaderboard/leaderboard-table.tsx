@@ -1,12 +1,32 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { User, mockUsers } from "@/lib/data/users";
 import { LeaderboardRow } from "./leaderboard-row";
 import { ProfileModal } from "./profile-modal";
 import { useAuth } from "@/contexts/auth-context";
 
 type SortBy = "networth" | "recent" | "name";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const rowVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+};
 
 export function LeaderboardTable() {
   const { user: currentUser } = useAuth();
@@ -72,16 +92,22 @@ export function LeaderboardTable() {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <motion.tbody
+            key={sortBy}
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
             {sortedUsers.map((user) => (
               <LeaderboardRow
                 key={user.id}
                 user={user}
                 isCurrentUser={currentUser?.id === user.id}
                 onProfile={setSelectedUser}
+                variants={rowVariants}
               />
             ))}
-          </tbody>
+          </motion.tbody>
         </table>
       </div>
 
