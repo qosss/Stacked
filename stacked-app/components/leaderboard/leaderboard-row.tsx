@@ -48,7 +48,9 @@ export function LeaderboardRow({
       </td>
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
-          <Avatar size="sm" initial={user.username.charAt(0).toUpperCase()} />
+          <div className="hidden md:block">
+            <Avatar size="sm" initial={user.username.charAt(0).toUpperCase()} />
+          </div>
           <div>
             <p className="font-medium text-text">{user.username}</p>
             <p className="text-xs text-text-muted">{user.phone}</p>
@@ -58,7 +60,7 @@ export function LeaderboardRow({
       <td className="px-6 py-4 text-right">
         <p className="font-bold text-accent">{formatNetWorth(user.netWorth)}</p>
       </td>
-      <td className="px-6 py-4 text-right">
+      <td className="hidden md:table-cell px-6 py-4 text-right">
         <div className="flex justify-end gap-2">
           {user.isOG && <Tag variant="og">OG</Tag>}
           {user.isEarly && <Tag variant="early">Early</Tag>}

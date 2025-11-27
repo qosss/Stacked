@@ -15,6 +15,10 @@ export function NetWorthInput({
   disabled,
   error,
 }: NetWorthInputProps) {
+  const inputId = "networth-input";
+  const helperId = "networth-help";
+  const errorId = "networth-error";
+
   const formatNetWorthInput = (val: string) => {
     // Allow digits and decimal point
     const cleaned = val.replace(/[^0-9.]/g, "");
@@ -47,30 +51,34 @@ export function NetWorthInput({
 
   return (
     <div>
-      <label className="block text-sm font-medium text-text mb-2">
+      <label htmlFor={inputId} className="block text-sm font-medium text-text mb-2">
         Net Worth
       </label>
       <div className="relative">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" aria-hidden="true">
           $
         </span>
         <Input
+          id={inputId}
           type="text"
           placeholder="1,000,000.00"
           value={value}
           onChange={handleChange}
           disabled={disabled}
+          aria-required="true"
+          aria-invalid={value && !isValid}
+          aria-describedby={helperId + (value && !isValid ? ` ${errorId}` : "")}
           className={`pl-7 ${
             value && !isValid ? "border-red-500" : isValid ? "border-accent" : ""
           }`}
         />
       </div>
       {value && !isValid && (
-        <p className="text-red-500 text-sm mt-1">
+        <p id={errorId} className="text-red-500 text-sm mt-1" role="alert">
           {error || "Please enter a valid amount"}
         </p>
       )}
-      <p className="text-text-muted text-xs mt-1">Enter your total net worth</p>
+      <p id={helperId} className="text-text-muted text-xs mt-1">Enter your total net worth</p>
     </div>
   );
 }

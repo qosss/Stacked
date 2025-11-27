@@ -87,7 +87,7 @@ export function LeaderboardTable() {
               <th className="px-6 py-3 text-right text-xs font-bold text-text-muted uppercase tracking-wider">
                 Net Worth
               </th>
-              <th className="px-6 py-3 text-right text-xs font-bold text-text-muted uppercase tracking-wider w-24">
+              <th className="hidden md:table-cell px-6 py-3 text-right text-xs font-bold text-text-muted uppercase tracking-wider w-24">
                 Tags
               </th>
             </tr>

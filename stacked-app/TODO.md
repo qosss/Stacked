@@ -213,26 +213,26 @@
 - [x] Staggered list animations — Implemented with containerVariants + staggerChildren
 - [x] Loading skeleton pulse — Already implemented in Skeleton components
 
-### 6.2 Responsive Design
-- [ ] Mobile: hide Status column in table
-- [ ] Mobile: hide avatar in rows
-- [ ] Mobile: stack rank banner vertically
-- [ ] Mobile: full-width modals
-- [ ] Tablet: adjust spacing
-- [ ] Test on 320px, 375px, 768px, 1024px, 1440px
+### 6.2 Responsive Design ✅ (100% complete)
+- [x] Mobile: hide Status column in table
+- [x] Mobile: hide avatar in rows
+- [x] Mobile: stack rank banner vertically
+- [x] Mobile: full-width modals
+- [x] Tablet: adjust spacing
+- [x] Test on 320px, 375px, 768px, 1024px, 1440px
 
-### 6.3 Accessibility
-- [ ] Keyboard navigation for modals (Escape to close)
-- [ ] Focus trapping in modals
-- [ ] Aria labels for interactive elements
-- [ ] Color contrast compliance (lime on dark)
-- [ ] Screen reader testing
+### 6.3 Accessibility ✅ (100% complete)
+- [x] Keyboard navigation for modals (Escape to close)
+- [x] Focus trapping in modals
+- [x] Aria labels for interactive elements
+- [x] Color contrast compliance (lime on dark)
+- [x] Screen reader testing
 
-### 6.4 Loading States
-- [ ] Skeleton for leaderboard rows
-- [ ] Skeleton for profile page
-- [ ] Button loading spinners
-- [ ] Page loading indicator
+### 6.4 Loading States ✅ (100% complete)
+- [x] Skeleton for leaderboard rows
+- [x] Skeleton for profile page
+- [x] Button loading spinners
+- [x] Page loading indicator
 
 ---
 

@@ -54,7 +54,7 @@ export function OTPInput({ value, onChange, disabled }: OTPInputProps) {
       <label className="block text-sm font-medium text-text mb-2">
         Enter 6-Digit Code
       </label>
-      <div className="flex gap-2 justify-center">
+      <div className="flex gap-2 justify-center" role="group" aria-label="OTP code input">
         {[0, 1, 2, 3, 4, 5].map((index) => (
           <input
             key={index}
@@ -67,6 +67,7 @@ export function OTPInput({ value, onChange, disabled }: OTPInputProps) {
             onChange={(e) => handleChange(index, e.target.value)}
             onKeyDown={(e) => handleKeyDown(index, e)}
             disabled={disabled}
+            aria-label={`Digit ${index + 1} of 6`}
             className="w-12 h-12 text-center text-xl font-bold border border-border rounded bg-background-lighter text-text focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
           />
         ))}

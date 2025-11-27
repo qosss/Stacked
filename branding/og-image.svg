@@ -1,0 +1,12 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- OG Share Image -->
+  <rect width="1200" height="630" fill="#0d0d0d"/>
+  
+  <!-- Logo centered -->
+  <text x="600" y="340" font-family="Space Grotesk, sans-serif" font-size="72" font-weight="700" letter-spacing="0.04em" text-anchor="middle">
+    <tspan fill="#c8ff00">[</tspan><tspan fill="#FFFFFF">STACKED</tspan><tspan fill="#c8ff00">]</tspan>
+  </text>
+  
+  <!-- Tagline -->
+  <text x="600" y="400" font-family="Space Grotesk, sans-serif" font-size="24" font-weight="400" fill="#555555" text-anchor="middle" letter-spacing="0.1em">SHOW YOUR STACK</text>
+</svg>

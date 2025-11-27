@@ -10,6 +10,7 @@ import { Modal } from "@/components/ui/modal";
 import { NetWorthInput } from "@/components/auth/networth-input";
 import { Tag } from "@/components/ui/tag";
 import { PageTransition } from "@/components/ui/page-transition";
+import { ProfileSkeleton } from "@/components/profile/profile-skeleton";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -28,8 +29,15 @@ export default function DashboardPage() {
 
   if (isLoading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background-deep">
-        <div className="text-text-muted">Loading...</div>
+      <div className="min-h-screen flex flex-col bg-background-deep">
+        <header className="border-b border-border p-6">
+          <Link href="/" className="font-display text-2xl font-bold">
+            STACKED
+          </Link>
+        </header>
+        <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
+          <ProfileSkeleton />
+        </main>
       </div>
     );
   }

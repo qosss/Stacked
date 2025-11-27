@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Space_Mono, Syne } from "next/font/google";
+import "nprogress/nprogress.css";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/auth-context";
 import { ToastProvider } from "@/components/ui/toast";
 import { Toaster } from "@/components/ui/toaster";
+import { NProgressProvider } from "@/components/providers/nprogress-provider";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -43,6 +45,7 @@ export default function RootLayout({
           <AuthProvider>{children}</AuthProvider>
           <Toaster />
         </ToastProvider>
+        <NProgressProvider />
       </body>
     </html>
   );

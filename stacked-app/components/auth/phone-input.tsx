@@ -11,6 +11,8 @@ interface PhoneInputProps {
 
 export function PhoneInput({ value, onChange, disabled }: PhoneInputProps) {
   const [isFocused, setIsFocused] = useState(false);
+  const inputId = "phone-input";
+  const helperId = "phone-help";
 
   const formatPhoneNumber = (phoneNumber: string) => {
     const cleaned = phoneNumber.replace(/\D/g, "");
@@ -30,10 +32,11 @@ export function PhoneInput({ value, onChange, disabled }: PhoneInputProps) {
 
   return (
     <div>
-      <label className="block text-sm font-medium text-text mb-2">
+      <label htmlFor={inputId} className="block text-sm font-medium text-text mb-2">
         Phone Number
       </label>
       <Input
+        id={inputId}
         type="tel"
         placeholder="+1-555-0000"
         value={value}
@@ -41,8 +44,13 @@ export function PhoneInput({ value, onChange, disabled }: PhoneInputProps) {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         disabled={disabled}
+        aria-required="true"
+        aria-describedby={helperId}
         className={isFocused ? "ring-2 ring-accent" : ""}
       />
+      <p id={helperId} className="text-text-muted text-xs mt-1">
+        Enter your phone number to get started
+      </p>
     </div>
   );
 }

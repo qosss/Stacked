@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STACKED — Final Brand Kit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 3rem 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #333;
+            margin-bottom: 3rem;
+        }
+        h2 {
+            font-size: 0.6rem;
+            color: #c8ff00;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        /* Primary Logo Display */
+        .primary-logo {
+            background: #0d0d0d;
+            border: 1px solid #1a1a1a;
+            border-radius: 16px;
+            padding: 4rem 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .primary-logo:hover {
+            border-color: #c8ff00;
+        }
+        .logo-label {
+            font-size: 0.55rem;
+            color: #c8ff00;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+
+        /* Logo Styles */
+        .logo-5a {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .logo-5a .bracket {
+            color: #c8ff00;
+            font-weight: 500;
+        }
+
+        .logo-5d {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+        .logo-5d .bracket {
+            color: #c8ff00;
+        }
+
+        /* Variants row */
+        .variants-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .variant-card {
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .variant-card:hover {
+            border-color: #333;
+        }
+        .variant-label {
+            font-size: 0.55rem;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+        .logo-small {
+            font-size: 1.8rem;
+        }
+
+        /* Icons Section */
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .icon-card {
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .icon-card:hover {
+            border-color: #333;
+        }
+        .icon-label {
+            font-size: 0.5rem;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        .app-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        .app-icon.lime { background: #c8ff00; }
+        .app-icon.dark { 
+            background: #0d0d0d; 
+            border: 1px solid #222;
+        }
+        .app-icon .monogram {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0a0a0a;
+        }
+        .app-icon.dark .monogram {
+            color: #c8ff00;
+        }
+        .app-icon .brackets-icon {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0a0a0a;
+        }
+        .app-icon.dark .brackets-icon {
+            color: #fff;
+        }
+        .app-icon.dark .brackets-icon .br {
+            color: #c8ff00;
+        }
+
+        /* Size row */
+        .sizes {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+        .size-48 {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            font-size: 1.4rem !important;
+        }
+        .size-48 .brackets-icon { font-size: 1rem !important; }
+        .size-32 {
+            width: 32px;
+            height: 32px;
+            border-radius: 7px;
+            font-size: 1rem !important;
+        }
+        .size-32 .brackets-icon { font-size: 0.7rem !important; }
+        .size-16 {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            font-size: 0.5rem !important;
+        }
+        .size-16 .brackets-icon { font-size: 0.35rem !important; }
+
+        /* Usage examples */
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .usage-card {
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .usage-header {
+            background: #0d0d0d;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .usage-header .mini-icon {
+            width: 24px;
+            height: 24px;
+            background: #c8ff00;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #0a0a0a;
+        }
+        .usage-header .site-name {
+            font-size: 0.7rem;
+            color: #888;
+        }
+        .usage-body {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .usage-label {
+            font-size: 0.5rem;
+            color: #444;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Color palette */
+        .colors-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .color-chip {
+            flex: 1;
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .color-swatch {
+            width: 100%;
+            height: 48px;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+        .color-swatch.lime { background: #c8ff00; }
+        .color-swatch.dark { background: #0d0d0d; border: 1px solid #222; }
+        .color-swatch.white { background: #ffffff; }
+        .color-name {
+            font-size: 0.6rem;
+            color: #888;
+            margin-bottom: 0.25rem;
+        }
+        .color-hex {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #555;
+        }
+
+        /* Download section */
+        .download-note {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+        }
+        .download-note p {
+            font-size: 0.75rem;
+            color: #555;
+        }
+
+        @media (max-width: 700px) {
+            .icons-grid { grid-template-columns: repeat(2, 1fr); }
+            .usage-grid { grid-template-columns: 1fr; }
+            .variants-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>STACKED — Brand Kit</h1>
+        <p class="subtitle">Final logo and icon assets</p>
+
+        <!-- PRIMARY LOGOS -->
+        <h2>Primary Logos</h2>
+        
+        <div class="primary-logo">
+            <div class="logo-label">Option A — Square Brackets</div>
+            <div class="logo-5a"><span class="bracket">[</span>STACKED<span class="bracket">]</span></div>
+        </div>
+
+        <div class="primary-logo">
+            <div class="logo-label">Option B — Curly Braces</div>
+            <div class="logo-5d"><span class="bracket">{</span>STACKED<span class="bracket">}</span></div>
+        </div>
+
+        <!-- VARIANTS -->
+        <h2>Logo Variants</h2>
+        <div class="variants-row">
+            <div class="variant-card">
+                <div class="variant-label">Square — Compact</div>
+                <div class="logo-5a logo-small"><span class="bracket">[</span>STACKED<span class="bracket">]</span></div>
+            </div>
+            <div class="variant-card">
+                <div class="variant-label">Curly — Compact</div>
+                <div class="logo-5d logo-small"><span class="bracket">{</span>STACKED<span class="bracket">}</span></div>
+            </div>
+        </div>
+
+        <!-- APP ICONS -->
+        <h2>App Icons</h2>
+        <div class="icons-grid">
+            <div class="icon-card">
+                <div class="icon-label">Monogram (Lime)</div>
+                <div class="app-icon lime">
+                    <span class="monogram">S</span>
+                </div>
+                <div class="sizes">
+                    <div class="app-icon lime size-48"><span class="monogram">S</span></div>
+                    <div class="app-icon lime size-32"><span class="monogram">S</span></div>
+                    <div class="app-icon lime size-16"><span class="monogram">S</span></div>
+                </div>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon-label">Monogram (Dark)</div>
+                <div class="app-icon dark">
+                    <span class="monogram">S</span>
+                </div>
+                <div class="sizes">
+                    <div class="app-icon dark size-48"><span class="monogram">S</span></div>
+                    <div class="app-icon dark size-32"><span class="monogram">S</span></div>
+                    <div class="app-icon dark size-16"><span class="monogram">S</span></div>
+                </div>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon-label">Brackets (Lime)</div>
+                <div class="app-icon lime">
+                    <span class="brackets-icon">[S]</span>
+                </div>
+                <div class="sizes">
+                    <div class="app-icon lime size-48"><span class="brackets-icon">[S]</span></div>
+                    <div class="app-icon lime size-32"><span class="brackets-icon">[S]</span></div>
+                    <div class="app-icon lime size-16"><span class="brackets-icon">[S]</span></div>
+                </div>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon-label">Brackets (Dark)</div>
+                <div class="app-icon dark">
+                    <span class="brackets-icon"><span class="br">[</span>S<span class="br">]</span></span>
+                </div>
+                <div class="sizes">
+                    <div class="app-icon dark size-48"><span class="brackets-icon"><span class="br">[</span>S<span class="br">]</span></span></div>
+                    <div class="app-icon dark size-32"><span class="brackets-icon"><span class="br">[</span>S<span class="br">]</span></span></div>
+                    <div class="app-icon dark size-16"><span class="brackets-icon"><span class="br">[</span>S<span class="br">]</span></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- USAGE EXAMPLES -->
+        <h2>Usage Examples</h2>
+        <div class="usage-grid">
+            <div class="usage-card">
+                <div class="usage-header">
+                    <div class="mini-icon">S</div>
+                    <span class="site-name">stacked.app</span>
+                </div>
+                <div class="usage-body">
+                    <div class="usage-label">Browser Tab</div>
+                </div>
+            </div>
+            <div class="usage-card">
+                <div class="usage-header">
+                    <div class="mini-icon" style="border-radius: 50%;">S</div>
+                    <span class="site-name">@stacked</span>
+                </div>
+                <div class="usage-body">
+                    <div class="usage-label">Social Profile</div>
+                </div>
+            </div>
+            <div class="usage-card">
+                <div class="usage-header">
+                    <div class="mini-icon">S</div>
+                    <span class="site-name">STACKED</span>
+                </div>
+                <div class="usage-body">
+                    <div class="usage-label">Mobile App</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLORS -->
+        <h2>Brand Colors</h2>
+        <div class="colors-row">
+            <div class="color-chip">
+                <div class="color-swatch lime"></div>
+                <div class="color-name">Lime (Primary)</div>
+                <div class="color-hex">#c8ff00</div>
+            </div>
+            <div class="color-chip">
+                <div class="color-swatch dark"></div>
+                <div class="color-name">Deep Black</div>
+                <div class="color-hex">#0d0d0d</div>
+            </div>
+            <div class="color-chip">
+                <div class="color-swatch white"></div>
+                <div class="color-name">White</div>
+                <div class="color-hex">#ffffff</div>
+            </div>
+        </div>
+
+        <!-- FONTS -->
+        <h2>Typography</h2>
+        <div class="variants-row">
+            <div class="variant-card">
+                <div class="variant-label">Display / Logo</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Space Grotesk Bold</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #555;">Or JetBrains Mono for brackets</div>
+            </div>
+            <div class="variant-card">
+                <div class="variant-label">Monogram</div>
+                <div style="font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;">Syne ExtraBold</div>
+            </div>
+        </div>
+
+        <div class="download-note">
+            <p>SVG files available in /logos/final/ folder</p>
+        </div>
+    </div>
+</body>
+</html>

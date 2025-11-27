@@ -13,7 +13,7 @@
     /* Text */
     --text-primary: #e0e0e0;
     --text-secondary: #888888;
-    --text-muted: #555555;
+    --text-muted: #888888;
     --text-inverse: #0d0d0d;
 
     /* Accent */
@@ -64,6 +64,39 @@
 }
 
 @layer utilities {
+  /* NProgress bar styling */
+  #nprogress {
+    @apply pointer-events-none;
+  }
+
+  #nprogress .bar {
+    @apply bg-accent h-1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1031;
+    box-shadow: 0 0 10px rgba(200, 255, 0, 0.5);
+  }
+
+  #nprogress .bar::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    width: 100px;
+    height: 100%;
+    box-shadow: 0 0 15px rgba(200, 255, 0, 0.8);
+    opacity: 1;
+    -webkit-transform: rotate(3deg) translateY(-4px);
+    -ms-transform: rotate(3deg) translateY(-4px);
+    transform: rotate(3deg) translateY(-4px);
+  }
+
+  #nprogress .peg {
+    box-shadow: 0 0 15px rgba(200, 255, 0, 0.8),
+                0 0 8px rgba(200, 255, 0, 0.5);
+  }
+
   /* Custom animations */
   @keyframes fadeIn {
     from {

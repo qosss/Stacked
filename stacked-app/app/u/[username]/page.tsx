@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
 import { Tag } from "@/components/ui/tag";
 import { PageTransition } from "@/components/ui/page-transition";
+import { ProfileSkeleton } from "@/components/profile/profile-skeleton";
 
 interface ProfilePageProps {
   params: {
