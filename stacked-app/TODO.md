@@ -17,7 +17,7 @@
 - [x] Create `globals.css` with CSS variables from mockup
 - [x] Set up dark theme as default (no light mode for MVP)
 - [x] Configure Tailwind with custom colors: `bg-deep`, `accent`, `negative`, etc.
-- [ ] Add subtle noise texture overlay (optional, low priority)
+- [x] Add subtle noise texture overlay (optional, low priority) — CSS ::before with inline SVG fractal noise
 
 ### 1.3 Layout Components
 - [x] Create root layout with font imports
