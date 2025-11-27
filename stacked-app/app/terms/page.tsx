@@ -1,286 +1,220 @@
-import { StaticPageLayout } from "@/components/layout/static-page-layout";
+import { StaticPageLayout } from "@/components/static/static-page-layout";
+import { Section } from "@/components/static/section";
+
+export const metadata = {
+  title: "Terms of Service | STACKED",
+  description: "Terms and conditions for using STACKED.",
+};
 
 export default function TermsPage() {
   return (
-    <StaticPageLayout title="Terms of Service" lastUpdated="November 26, 2024">
-      <div className="space-y-12">
-        {/* Acceptance of Terms */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            1. Acceptance of Terms
-          </h2>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            By accessing and using STACKED, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
-          </p>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            <strong>Age Requirement:</strong> You must be at least 13 years old to use STACKED. If you are under 18, your parent or legal guardian must consent to these terms on your behalf.
-          </p>
-          <p className="text-sm leading-relaxed text-text-primary">
-            We may update these terms at any time. Continued use of the platform after changes constitutes your acceptance of the new terms.
-          </p>
-        </section>
+    <StaticPageLayout
+      title="Terms of Service"
+      lastUpdated="November 26, 2024"
+    >
+      <Section title="Acceptance of Terms">
+        <p>
+          By accessing and using STACKED, you agree to be bound by these Terms of Service.
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-2 mt-3">
+          <li>You must be at least 18 years old to use STACKED</li>
+          <li>You may only create one account per person</li>
+          <li>You are responsible for all activity on your account</li>
+        </ul>
+      </Section>
 
-        {/* Account Registration */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            2. Account Registration
-          </h2>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            To use STACKED, you must create an account using a valid phone number. You agree to:
-          </p>
-          <ul className="list-disc list-inside space-y-3 text-sm text-text-primary mb-6">
-            <li>Provide accurate, complete, and current information during registration</li>
-            <li>
-              Maintain the confidentiality of your account credentials and be responsible for all activity under your account
-            </li>
-            <li>
-              Not share your account with others or use another person's account without permission
-            </li>
-            <li>
-              Notify us immediately of any unauthorized use of your account or any other breach of security
-            </li>
-          </ul>
-          <p className="text-sm leading-relaxed text-text-primary">
-            One phone number per account is permitted. Using multiple accounts to artificially boost rankings or manipulate the leaderboard is prohibited and may result in suspension.
-          </p>
-        </section>
+      <Section title="Account Registration">
+        <p>To use STACKED, you must create an account through phone OTP authentication.</p>
+        <ul className="list-disc list-inside ml-4 space-y-2 mt-3">
+          <li>Each phone number can only be used for one account</li>
+          <li>You must provide a unique username during signup</li>
+          <li>You are responsible for keeping your phone confidential</li>
+        </ul>
+      </Section>
 
-        {/* Username Policy */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            3. Username Policy
-          </h2>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            Your username is a core part of your STACKED identity. Please choose wisely:
+      <Section title="Username Policy">
+        <div className="bg-accent/10 border-l-4 border-accent p-4 my-6 rounded-sm">
+          <p className="font-bold text-accent text-sm mb-2">⚠️ Important: Usernames Are Permanent</p>
+          <p className="text-sm">
+            Your username cannot be changed after account creation. Choose carefully. This policy creates scarcity and prevents username squatting.
           </p>
-          <ul className="list-disc list-inside space-y-3 text-sm text-text-primary mb-6">
-            <li>
-              <strong>Permanence:</strong> Usernames cannot be changed once created. This ensures scarcity and personal identity.
-            </li>
-            <li>
-              <strong>Format Requirements:</strong> Usernames must be lowercase, 3-20 characters, containing only letters, numbers, and underscores (a-z, 0-9, _).
-            </li>
-            <li>
-              <strong>Prohibited Usernames:</strong> You may not use usernames that:
-              <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
-                <li>Contain obscenities or hate speech</li>
-                <li>Impersonate real people or organizations</li>
-                <li>Infringe on trademarks or intellectual property</li>
-                <li>Are reserved by STACKED (e.g., "admin", "support", "stacked")</li>
-              </ul>
-            </li>
-            <li>
-              <strong>STACKED Rights:</strong> We reserve the right to reclaim or suspend usernames for abuse, impersonation, or violation of these terms.
-            </li>
-          </ul>
-        </section>
+        </div>
 
-        {/* Self-Reported Data Disclaimer */}
-        <section>
-          <div className="border-l-4 border-accent bg-accent/10 p-6 rounded-r mb-6">
-            <h2 className="font-display text-2xl font-bold mb-4 text-accent">
-              4. ⚠️ Self-Reported Data Disclaimer
-            </h2>
-            <p className="text-sm leading-relaxed mb-4 text-text-primary">
-              <strong>IMPORTANT:</strong> All net worth values on STACKED are self-reported by users. This is critical information you must understand:
-            </p>
-            <ul className="list-disc list-inside space-y-3 text-sm text-text-primary">
-              <li>
-                <strong>No Verification:</strong> In the current MVP phase, STACKED does not verify or validate the accuracy of reported net worth values.
-              </li>
-              <li>
-                <strong>Not Financial Advice:</strong> STACKED is not financial advice. Rankings and comparisons should not be used to make financial decisions.
-              </li>
-              <li>
-                <strong>Use at Your Own Risk:</strong> Any decisions or actions based on information from STACKED are at your own discretion and risk.
-              </li>
-              <li>
-                <strong>No Responsibility:</strong> STACKED is not responsible for the accuracy, completeness, or consequences of any self-reported data.
-              </li>
-              <li>
-                <strong>Future Verification:</strong> We are building a verification system using Plaid/Teller to allow optional bank account connection. This will be optional, and unverified values will be clearly marked.
-              </li>
-            </ul>
-            <p className="text-sm leading-relaxed mt-4 text-text-primary">
-              By using STACKED and viewing rankings, you acknowledge and accept that all data is self-reported and unverified.
-            </p>
-          </div>
-        </section>
+        <p className="font-bold mb-3">Username Requirements:</p>
+        <ul className="list-disc list-inside ml-4 space-y-2">
+          <li>3-20 characters long</li>
+          <li>Lowercase letters (a-z), numbers (0-9), and underscores (_) only</li>
+          <li>Cannot start or end with an underscore</li>
+          <li>Must be unique (no duplicates)</li>
+        </ul>
 
-        {/* Prohibited Conduct */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            5. Prohibited Conduct
-          </h2>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            You agree not to engage in any of the following prohibited activities:
-          </p>
-          <ul className="list-disc list-inside space-y-3 text-sm text-text-primary mb-6">
-            <li>
-              <strong>Spam & Abuse:</strong> Harassment, bullying, or sending unsolicited messages
-            </li>
-            <li>
-              <strong>Impersonation:</strong> Pretending to be someone else or creating accounts in others' names
-            </li>
-            <li>
-              <strong>Automated Access:</strong> Using bots, scrapers, or automated tools to access the platform without permission
-            </li>
-            <li>
-              <strong>False Information:</strong> Intentionally providing misleading or fraudulent information
-            </li>
-            <li>
-              <strong>Illegal Activity:</strong> Any activity that violates local, state, national, or international law
-            </li>
-            <li>
-              <strong>Circumventing Security:</strong> Attempting to bypass security measures or access unauthorized areas
-            </li>
-            <li>
-              <strong>Manipulation:</strong> Creating multiple accounts, artificially inflating rankings, or gaming the leaderboard
-            </li>
-          </ul>
-          <p className="text-sm leading-relaxed text-text-primary">
-            We monitor for prohibited conduct and take violations seriously.
-          </p>
-        </section>
+        <p className="font-bold mt-6 mb-3">Prohibited Usernames:</p>
+        <ul className="list-disc list-inside ml-4 space-y-2">
+          <li>Offensive, hateful, or discriminatory content</li>
+          <li>Trademarked brand names (Apple, Tesla, etc.)</li>
+          <li>Impersonation of real people or celebrities</li>
+          <li>Reserved system names: admin, stacked, support, help, api, status, blog</li>
+        </ul>
 
-        {/* Intellectual Property */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            6. Intellectual Property
-          </h2>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            <strong>STACKED Content:</strong> All design, code, features, and original content on STACKED are owned by or licensed to STACKED and are protected by international copyright and trademark laws.
-          </p>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            <strong>Your Content:</strong> You retain ownership of any data you submit (your username, net worth values). By submitting this data, you grant STACKED a license to display, distribute, and use this data on the platform.
-          </p>
-          <p className="text-sm leading-relaxed text-text-primary">
-            <strong>Restrictions:</strong> You may not copy, modify, distribute, or reproduce any content from STACKED without explicit permission.
-          </p>
-        </section>
+        <p className="mt-6">
+          We reserve the right to reclaim usernames that violate these policies without notice or compensation.
+        </p>
+      </Section>
 
-        {/* Termination */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            7. Termination
-          </h2>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            STACKED reserves the right to suspend or terminate your account if you:
-          </p>
-          <ul className="list-disc list-inside space-y-3 text-sm text-text-primary mb-6">
-            <li>Violate these terms or any applicable laws</li>
-            <li>Engage in prohibited conduct (see Section 5)</li>
-            <li>Provide false or misleading information</li>
-            <li>Engage in harassment or abusive behavior</li>
-          </ul>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            <strong>Warning System:</strong> Most violations will result in a warning before suspension. Severe violations (fraud, abuse, illegal activity) may result in immediate termination without warning.
-          </p>
-          <p className="text-sm leading-relaxed text-text-primary">
-            <strong>User-Initiated Deletion:</strong> You will be able to delete your account (coming soon). You can contact{" "}
-            <a
-              href="mailto:hello@stacked.gg"
-              className="text-accent hover:opacity-80 transition-opacity underline"
-            >
-              hello@stacked.gg
-            </a>{" "}
-            for assistance with account deletion requests.
-          </p>
-        </section>
+      <Section title="Self-Reported Data Disclaimer">
+        <div className="bg-accent/10 border-l-4 border-accent p-4 my-6 rounded-sm">
+          <p className="font-bold text-accent text-sm mb-2">⚠️ All Values Are Unverified</p>
+          <p className="text-sm">All net worth values on STACKED are self-reported and unverified.</p>
+        </div>
+        <ul className="list-disc list-inside ml-4 space-y-2">
+          <li>Users are solely responsible for accuracy</li>
+          <li>STACKED does not verify assets or liabilities</li>
+          <li>Nothing constitutes financial advice</li>
+        </ul>
+      </Section>
 
-        {/* Disclaimers */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            8. Disclaimers
-          </h2>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            STACKED is provided "as is" and "as available" without any warranties, express or implied:
-          </p>
-          <ul className="list-disc list-inside space-y-3 text-sm text-text-primary mb-6">
-            <li>
-              <strong>No Guarantees:</strong> We make no guarantee of accuracy, reliability, uptime, or fitness for any particular purpose.
-            </li>
-            <li>
-              <strong>Not Financial Advice:</strong> STACKED is not a financial advisor. Viewing net worth rankings is not financial advice and should not be used to make investment decisions.
-            </li>
-            <li>
-              <strong>Not Legal Advice:</strong> These terms, our privacy policy, and any communication from STACKED do not constitute legal advice.
-            </li>
-            <li>
-              <strong>Not Professional Advice:</strong> Any information or content on STACKED is for informational purposes only.
-            </li>
-            <li>
-              <strong>User-Generated Content:</strong> STACKED is not responsible for the accuracy, completeness, or consequences of user-submitted data.
-            </li>
-            <li>
-              <strong>Third-Party Services:</strong> We are not responsible for services, content, or data provided by third parties (Supabase, Plaid, Teller, etc.).
-            </li>
-          </ul>
-        </section>
+      <Section title="Prohibited Conduct">
+        <p>
+          You agree not to use STACKED in any way that violates these terms or applicable laws:
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-2 mt-3">
+          <li>
+            <strong>Bots & Automation:</strong> You may not use automated tools, scripts, or bots to access STACKED or submit data
+          </li>
+          <li>
+            <strong>Scraping:</strong> You may not scrape, crawl, or harvest user data from STACKED
+          </li>
+          <li>
+            <strong>Multiple Accounts:</strong> You may not create multiple accounts. One account per person maximum.
+          </li>
+          <li>
+            <strong>Fraud:</strong> You may not submit false, misleading, or fraudulent net worth data
+          </li>
+          <li>
+            <strong>Abuse:</strong> You may not harass, threaten, or abuse other users
+          </li>
+          <li>
+            <strong>Spam:</strong> You may not post spam or promotional content
+          </li>
+          <li>
+            <strong>System Attack:</strong> You may not attempt to hack, exploit, or damage STACKED's systems
+          </li>
+        </ul>
 
-        {/* Limitation of Liability */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            9. Limitation of Liability
-          </h2>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            To the fullest extent permitted by law, STACKED and its officers, directors, employees, and agents shall not be liable for:
-          </p>
-          <ul className="list-disc list-inside space-y-3 text-sm text-text-primary mb-6">
-            <li>
-              <strong>Maximum Liability:</strong> Our total liability shall not exceed $100 or the amount you paid us, whichever is greater.
-            </li>
-            <li>
-              <strong>Indirect Damages:</strong> We are not liable for lost profits, data loss, or other indirect, incidental, or consequential damages.
-            </li>
-            <li>
-              <strong>Your Indemnification:</strong> You agree to indemnify and hold harmless STACKED from any claims, damages, or costs arising from your violation of these terms or your use of STACKED.
-            </li>
-            <li>
-              <strong>Force Majeure:</strong> We are not liable for failure to perform due to causes beyond our reasonable control (natural disasters, wars, pandemics, etc.).
-            </li>
-          </ul>
-        </section>
+        <p className="mt-4">
+          We monitor for suspicious activity and may suspend or terminate accounts without notice if we suspect violations.
+        </p>
+      </Section>
 
-        {/* Governing Law & Disputes */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            10. Governing Law & Disputes
-          </h2>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            These terms shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to conflict of law principles.
-          </p>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            <strong>Dispute Resolution:</strong> Any disputes shall be resolved through binding arbitration rather than court proceedings. Both parties agree to arbitrate any disputes.
-          </p>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            <strong>Class Action Waiver:</strong> You agree not to participate in any class action lawsuit against STACKED. All disputes must be resolved on an individual basis.
-          </p>
-          <p className="text-sm leading-relaxed mb-6 text-text-primary">
-            <strong>Severability:</strong> If any provision of these terms is found to be invalid, that provision shall be severed and the remaining terms shall continue in effect.
-          </p>
-          <p className="text-sm leading-relaxed text-text-primary">
-            <strong>Entire Agreement:</strong> These terms, along with the Privacy Policy, constitute the entire agreement between you and STACKED regarding your use of the platform.
-          </p>
-        </section>
+      <Section title="Termination">
+        <p>
+          Your right to use STACKED may be suspended or terminated under these circumstances:
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-2 mt-3">
+          <li>Violation of these Terms of Service</li>
+          <li>Submission of knowingly false or fraudulent data at scale</li>
+          <li>Abuse or harassment of other users</li>
+          <li>Attempted hacking, exploitation, or system damage</li>
+          <li>Use of bots or automated tools</li>
+        </ul>
 
-        {/* Contact */}
-        <section>
-          <h2 className="font-display text-2xl font-bold mb-4 text-text-primary">
-            Questions?
-          </h2>
-          <p className="text-sm leading-relaxed text-text-primary">
-            If you have any questions about these Terms of Service, please contact us at{" "}
-            <a
-              href="mailto:hello@stacked.gg"
-              className="text-accent hover:opacity-80 transition-opacity underline"
-            >
-              hello@stacked.gg
-            </a>
-            .
-          </p>
-        </section>
-      </div>
+        <p className="mt-4 font-bold">Your Right to Terminate:</p>
+        <p>
+          You may delete your account at any time by emailing support@stacked.com with "DELETE MY ACCOUNT" in the subject line. All your data will be permanently removed within 30 days.
+        </p>
+      </Section>
+
+      <Section title="Disclaimers">
+        <p>
+          STACKED is provided "AS IS" and "AS AVAILABLE" without warranties of any kind:
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-2 mt-3">
+          <li>
+            <strong>No warranty of accuracy:</strong> We do not warrant that leaderboard rankings, net worth calculations, or user data are accurate
+          </li>
+          <li>
+            <strong>No warranty of availability:</strong> We do not guarantee uptime or uninterrupted service
+          </li>
+          <li>
+            <strong>No warranty of fitness:</strong> STACKED is not intended for financial decision-making
+          </li>
+          <li>
+            <strong>Not financial advice:</strong> Nothing on STACKED constitutes investment advice or financial guidance
+          </li>
+          <li>
+            <strong>User responsibility:</strong> You use STACKED at your own risk
+          </li>
+        </ul>
+      </Section>
+
+      <Section title="Limitation of Liability">
+        <p>
+          In no event shall STACKED, its founders, or its operators be liable for any damages arising from your use of the service, including:
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-2 mt-3">
+          <li>Direct damages (lost data, service interruptions)</li>
+          <li>Indirect damages (lost profits, business interruption)</li>
+          <li>Consequential damages (decisions made based on STACKED data)</li>
+          <li>Incidental damages (cost of substitute services)</li>
+        </ul>
+
+        <p className="mt-4 font-bold">Maximum Liability:</p>
+        <p>
+          In jurisdictions where liability limitations are permitted, our maximum liability to you shall not exceed the greater of (a) $100 USD or (b) any amount you have paid to STACKED in the past 12 months.
+        </p>
+      </Section>
+
+      <Section title="Changes to Terms">
+        <p>
+          We may modify these Terms of Service at any time:
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-2 mt-3">
+          <li>We will post updates to this page with a new "Last Updated" date</li>
+          <li>For material changes, we will notify users via email or prominent banner</li>
+          <li>Your continued use of STACKED after changes constitutes acceptance</li>
+          <li>If you do not agree with changes, you may delete your account</li>
+        </ul>
+      </Section>
+
+      <Section title="Governing Law & Jurisdiction">
+        <p>
+          These Terms of Service are governed by the laws of Delaware, USA, without regard to conflict of law principles.
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-2 mt-3">
+          <li>Any disputes will be resolved through binding arbitration (not court litigation)</li>
+          <li>Arbitration will take place in Wilmington, Delaware</li>
+          <li>You waive the right to a jury trial and class action participation</li>
+          <li>Either party may appeal arbitration decisions in limited circumstances</li>
+        </ul>
+
+        <p className="mt-4">
+          For EU users, local consumer protection laws may apply regardless of this clause.
+        </p>
+      </Section>
+
+      <Section title="Contact & Support">
+        <p>
+          For questions about these terms or to report violations:
+        </p>
+        <ul className="list-disc list-inside ml-4 space-y-2 mt-3">
+          <li>
+            <strong>Email:</strong> support@stacked.com
+          </li>
+          <li>
+            <strong>Response time:</strong> 48-72 hours
+          </li>
+          <li>
+            <strong>Account deletion requests:</strong> Email with "DELETE MY ACCOUNT" subject line
+          </li>
+          <li>
+            <strong>Report violations:</strong> Email with "REPORT VIOLATION" subject line
+          </li>
+        </ul>
+      </Section>
+
+      <p className="mt-8 text-text-muted text-xs">
+        These Terms of Service are effective as of November 26, 2024. Last updated: November 26, 2024.
+      </p>
     </StaticPageLayout>
   );
 }
