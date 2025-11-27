@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Space_Mono, Syne } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/auth-context";
+import { ToastProvider } from "@/components/ui/toast";
+import { Toaster } from "@/components/ui/toaster";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -37,7 +39,10 @@ export default function RootLayout({
       <body
         className={`${spaceMono.variable} ${syne.variable} antialiased`}
       >
-        <AuthProvider>{children}</AuthProvider>
+        <ToastProvider>
+          <AuthProvider>{children}</AuthProvider>
+          <Toaster />
+        </ToastProvider>
       </body>
     </html>
   );

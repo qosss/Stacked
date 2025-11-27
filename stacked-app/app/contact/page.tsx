@@ -2,7 +2,13 @@ import { StaticPageLayout } from "@/components/layout/static-page-layout";
 
 export default function ContactPage() {
   return (
-    <StaticPageLayout title="Get in Touch">
+    <StaticPageLayout
+      title="Get in Touch"
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "Contact", href: "/contact" },
+      ]}
+    >
       <div className="max-w-md mx-auto text-center space-y-8">
         <p className="text-text-secondary text-lg">
           Have questions, feedback, or found a bug? We'd love to hear from you.

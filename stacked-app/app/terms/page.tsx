@@ -11,6 +11,10 @@ export default function TermsPage() {
     <StaticPageLayout
       title="Terms of Service"
       lastUpdated="November 26, 2024"
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "Terms of Service", href: "/terms" },
+      ]}
     >
       <Section title="Acceptance of Terms">
         <p>

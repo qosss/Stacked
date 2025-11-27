@@ -124,9 +124,13 @@ const faqItems = [
 
 export default function FAQPage() {
   return (
-    <StaticPageLayout 
+    <StaticPageLayout
       title="Frequently Asked Questions"
       subtitle="Everything you need to know about STACKED"
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "FAQ", href: "/faq" },
+      ]}
     >
       <Accordion items={faqItems} />
     </StaticPageLayout>

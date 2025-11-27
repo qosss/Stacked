@@ -194,10 +194,10 @@ export default function DashboardPage() {
                 <Button
                   type="submit"
                   variant="primary"
-                  disabled={isUpdating}
+                  loading={isUpdating}
                   className="w-full"
                 >
-                  {isUpdating ? "..." : "Save"}
+                  Save
                 </Button>
                 <Button
                   type="button"

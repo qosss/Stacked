@@ -5,6 +5,10 @@ export default function PrivacyPage() {
     <StaticPageLayout
       title="Privacy Policy"
       lastUpdated="November 26, 2024"
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "Privacy Policy", href: "/privacy" },
+      ]}
     >
       <div className="space-y-12">
         {/* Introduction */}
