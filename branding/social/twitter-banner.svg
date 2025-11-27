@@ -1,0 +1,28 @@
+<svg width="1500" height="500" viewBox="0 0 1500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Twitter/X Banner - 1500x500 -->
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap');
+    </style>
+    
+    <!-- Subtle grid pattern -->
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#151515" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1500" height="500" fill="#0d0d0d"/>
+  <rect width="1500" height="500" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Logo - positioned elements -->
+  <text x="510" y="225" font-family="'Space Grotesk', sans-serif" font-size="72" font-weight="500" fill="#c8ff00" letter-spacing="0.04em">[</text>
+  <text x="555" y="225" font-family="'Space Grotesk', sans-serif" font-size="72" font-weight="700" fill="#ffffff" letter-spacing="0.04em">STACKED</text>
+  <text x="905" y="225" font-family="'Space Grotesk', sans-serif" font-size="72" font-weight="500" fill="#c8ff00" letter-spacing="0.04em">]</text>
+  
+  <!-- Tagline -->
+  <text x="750" y="290" font-family="'Space Grotesk', sans-serif" font-size="24" font-weight="500" fill="#c8ff00" text-anchor="middle" letter-spacing="0.06em">Show your stack.</text>
+  
+  <!-- Descriptor -->
+  <text x="750" y="335" font-family="'Space Grotesk', sans-serif" font-size="18" font-weight="400" fill="#555555" text-anchor="middle" letter-spacing="0.04em">The global net worth leaderboard.</text>
+</svg>

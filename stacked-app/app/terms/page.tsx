@@ -1,3 +1,5 @@
+"use client";
+
 import { StaticPageLayout } from "@/components/static/static-page-layout";
 import { Section } from "@/components/static/section";
 import { PageTransition } from "@/components/ui/page-transition";

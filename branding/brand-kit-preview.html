@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STACKED — Brand Kit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 3rem 2rem;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+        }
+        
+        .header-label {
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+        }
+        
+        .header-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 1rem;
+        }
+        
+        .header-logo .bracket { color: #c8ff00; font-weight: 500; }
+        
+        .header-tagline {
+            font-size: 1.2rem;
+            color: #c8ff00;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-descriptor {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        /* Section headers */
+        h2 {
+            font-size: 0.65rem;
+            color: #c8ff00;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin: 4rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        /* Logo cards */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .logo-card {
+            background: #0d0d0d;
+            border: 1px solid #1a1a1a;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+        
+        .logo-card:hover { border-color: #c8ff00; }
+        
+        .logo-card.light {
+            background: #f5f5f5;
+        }
+        
+        .logo-card-label {
+            font-size: 0.55rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-card.light .logo-card-label { color: #888; }
+        
+        .logo-square {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        
+        .logo-square .bracket { color: #c8ff00; font-weight: 500; }
+        .logo-square.dark { color: #0d0d0d; }
+        .logo-square.dark .bracket { color: #0d0d0d; }
+        
+        .logo-curly {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        
+        .logo-curly .bracket { color: #c8ff00; }
+        .logo-curly.dark { color: #0d0d0d; }
+        .logo-curly.dark .bracket { color: #0d0d0d; }
+        
+        /* Icon grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .icon-card {
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .icon-card:hover { border-color: #333; }
+        
+        .icon-label {
+            font-size: 0.5rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        
+        .app-icon.lime { background: #c8ff00; }
+        .app-icon.dark { 
+            background: #0d0d0d; 
+            border: 1px solid #222;
+        }
+        
+        .app-icon .monogram {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #0a0a0a;
+        }
+        
+        .app-icon.dark .monogram { color: #c8ff00; }
+        
+        .app-icon .brackets {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0a0a0a;
+        }
+        
+        .app-icon.dark .brackets { color: #fff; }
+        .app-icon.dark .brackets .br { color: #c8ff00; }
+        
+        /* Size demo */
+        .sizes {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .size-48 { width: 48px; height: 48px; border-radius: 10px; font-size: 1.6rem !important; }
+        .size-32 { width: 32px; height: 32px; border-radius: 7px; font-size: 1.1rem !important; }
+        .size-16 { width: 16px; height: 16px; border-radius: 3px; font-size: 0.6rem !important; }
+        
+        .size-48 .brackets { font-size: 1rem !important; }
+        .size-32 .brackets { font-size: 0.7rem !important; }
+        .size-16 .brackets { font-size: 0.35rem !important; }
+        
+        /* Colors */
+        .colors-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        
+        .color-chip {
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        
+        .color-swatch {
+            width: 100%;
+            height: 60px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .color-swatch.lime { background: #c8ff00; }
+        .color-swatch.dark { background: #0d0d0d; border: 1px solid #222; }
+        .color-swatch.white { background: #ffffff; }
+        .color-swatch.gray { background: #555555; }
+        
+        .color-name {
+            font-size: 0.7rem;
+            color: #888;
+            margin-bottom: 0.25rem;
+        }
+        
+        .color-hex {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #c8ff00;
+        }
+        
+        /* Typography */
+        .type-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .type-card {
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        .type-label {
+            font-size: 0.55rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .type-demo {
+            margin-bottom: 0.5rem;
+        }
+        
+        .type-name {
+            font-size: 0.7rem;
+            color: #666;
+        }
+        
+        /* Social preview */
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .social-card {
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .social-preview {
+            background: #0d0d0d;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        .social-preview.og {
+            aspect-ratio: 1200 / 630;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .social-preview.twitter {
+            aspect-ratio: 1500 / 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .social-label {
+            padding: 1rem;
+            font-size: 0.6rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .footer p {
+            font-size: 0.8rem;
+            color: #555;
+        }
+        
+        @media (max-width: 800px) {
+            .logo-grid, .icon-grid, .colors-row, .type-grid, .social-grid {
+                grid-template-columns: 1fr;
+            }
+            .icon-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="header-label">Brand Kit</div>
+            <div class="header-logo"><span class="bracket">[</span>STACKED<span class="bracket">]</span></div>
+            <div class="header-tagline">Show your stack.</div>
+            <div class="header-descriptor">The global net worth leaderboard.</div>
+        </div>
+        
+        <!-- Primary Logos -->
+        <h2>Primary Logos</h2>
+        <div class="logo-grid">
+            <div class="logo-card">
+                <div class="logo-card-label">Square Brackets — Dark BG</div>
+                <div class="logo-square"><span class="bracket">[</span>STACKED<span class="bracket">]</span></div>
+            </div>
+            <div class="logo-card">
+                <div class="logo-card-label">Curly Braces — Dark BG</div>
+                <div class="logo-curly"><span class="bracket">{</span>STACKED<span class="bracket">}</span></div>
+            </div>
+            <div class="logo-card light">
+                <div class="logo-card-label">Square Brackets — Light BG</div>
+                <div class="logo-square dark"><span class="bracket">[</span>STACKED<span class="bracket">]</span></div>
+            </div>
+            <div class="logo-card light">
+                <div class="logo-card-label">Curly Braces — Light BG</div>
+                <div class="logo-curly dark"><span class="bracket">{</span>STACKED<span class="bracket">}</span></div>
+            </div>
+        </div>
+        
+        <!-- App Icons -->
+        <h2>App Icons</h2>
+        <div class="icon-grid">
+            <div class="icon-card">
+                <div class="icon-label">Monogram — Lime</div>
+                <div class="app-icon lime"><span class="monogram">S</span></div>
+                <div class="sizes">
+                    <div class="app-icon lime size-48"><span class="monogram">S</span></div>
+                    <div class="app-icon lime size-32"><span class="monogram">S</span></div>
+                    <div class="app-icon lime size-16"><span class="monogram">S</span></div>
+                </div>
+            </div>
+            <div class="icon-card">
+                <div class="icon-label">Monogram — Dark</div>
+                <div class="app-icon dark"><span class="monogram">S</span></div>
+                <div class="sizes">
+                    <div class="app-icon dark size-48"><span class="monogram">S</span></div>
+                    <div class="app-icon dark size-32"><span class="monogram">S</span></div>
+                    <div class="app-icon dark size-16"><span class="monogram">S</span></div>
+                </div>
+            </div>
+            <div class="icon-card">
+                <div class="icon-label">Brackets — Lime</div>
+                <div class="app-icon lime"><span class="brackets">[S]</span></div>
+                <div class="sizes">
+                    <div class="app-icon lime size-48"><span class="brackets">[S]</span></div>
+                    <div class="app-icon lime size-32"><span class="brackets">[S]</span></div>
+                    <div class="app-icon lime size-16"><span class="brackets">[S]</span></div>
+                </div>
+            </div>
+            <div class="icon-card">
+                <div class="icon-label">Brackets — Dark</div>
+                <div class="app-icon dark"><span class="brackets"><span class="br">[</span>S<span class="br">]</span></span></div>
+                <div class="sizes">
+                    <div class="app-icon dark size-48"><span class="brackets"><span class="br">[</span>S<span class="br">]</span></span></div>
+                    <div class="app-icon dark size-32"><span class="brackets"><span class="br">[</span>S<span class="br">]</span></span></div>
+                    <div class="app-icon dark size-16"><span class="brackets"><span class="br">[</span>S<span class="br">]</span></span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Colors -->
+        <h2>Brand Colors</h2>
+        <div class="colors-row">
+            <div class="color-chip">
+                <div class="color-swatch lime"></div>
+                <div class="color-name">Lime (Primary)</div>
+                <div class="color-hex">#c8ff00</div>
+            </div>
+            <div class="color-chip">
+                <div class="color-swatch dark"></div>
+                <div class="color-name">Deep Black</div>
+                <div class="color-hex">#0d0d0d</div>
+            </div>
+            <div class="color-chip">
+                <div class="color-swatch white"></div>
+                <div class="color-name">White</div>
+                <div class="color-hex">#ffffff</div>
+            </div>
+            <div class="color-chip">
+                <div class="color-swatch gray"></div>
+                <div class="color-name">Muted Gray</div>
+                <div class="color-hex">#555555</div>
+            </div>
+        </div>
+        
+        <!-- Typography -->
+        <h2>Typography</h2>
+        <div class="type-grid">
+            <div class="type-card">
+                <div class="type-label">Logo (Square Brackets)</div>
+                <div class="type-demo" style="font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700;">Space Grotesk</div>
+                <div class="type-name">Bold 700</div>
+            </div>
+            <div class="type-card">
+                <div class="type-label">Logo (Curly Braces)</div>
+                <div class="type-demo" style="font-family: 'JetBrains Mono'; font-size: 1.3rem; font-weight: 600;">JetBrains Mono</div>
+                <div class="type-name">SemiBold 600</div>
+            </div>
+            <div class="type-card">
+                <div class="type-label">Monogram Icon</div>
+                <div class="type-demo" style="font-family: 'Syne'; font-size: 2rem; font-weight: 800;">Syne</div>
+                <div class="type-name">ExtraBold 800</div>
+            </div>
+        </div>
+        
+        <!-- Social -->
+        <h2>Social Assets</h2>
+        <div class="social-grid">
+            <div class="social-card">
+                <div class="social-preview og">
+                    <div class="logo-square" style="font-size: 2rem; margin-bottom: 0.5rem;"><span class="bracket">[</span>STACKED<span class="bracket">]</span></div>
+                    <div style="color: #c8ff00; font-size: 0.9rem; margin-bottom: 0.25rem;">Show your stack.</div>
+                    <div style="color: #555; font-size: 0.7rem;">The global net worth leaderboard.</div>
+                </div>
+                <div class="social-label">OG Image — 1200×630</div>
+            </div>
+            <div class="social-card">
+                <div class="social-preview twitter">
+                    <div class="logo-square" style="font-size: 1.6rem; margin-bottom: 0.4rem;"><span class="bracket">[</span>STACKED<span class="bracket">]</span></div>
+                    <div style="color: #c8ff00; font-size: 0.75rem; margin-bottom: 0.2rem;">Show your stack.</div>
+                    <div style="color: #555; font-size: 0.6rem;">The global net worth leaderboard.</div>
+                </div>
+                <div class="social-label">Twitter Banner — 1500×500</div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>STACKED Brand Kit — November 2025</p>
+        </div>
+        
+    </div>
+</body>
+</html>

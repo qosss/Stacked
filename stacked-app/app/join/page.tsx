@@ -169,7 +169,7 @@ export default function JoinPage() {
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10 bg-background-deep">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-block bg-accent text-background font-bold rounded-full w-10 h-10 flex items-center justify-center mb-4">
+          <div className="inline-block bg-accent text-text-inverse font-bold rounded-full w-10 h-10 flex items-center justify-center mb-4">
             {getStepNumber()}
           </div>
           <h1 className="font-display text-3xl font-bold mb-2">Join STACKED</h1>

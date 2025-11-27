@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { getUserRank, formatNetWorth } from "@/lib/data/users";
+import { getRankColor, formatNetWorthWithCents } from "@/lib/utils";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
@@ -43,13 +44,6 @@ export default function DashboardPage() {
   }
 
   const rank = getUserRank(user.id);
-
-  const getRankColor = (rank: number) => {
-    if (rank === 1) return "text-accent";
-    if (rank === 2) return "text-gray-400";
-    if (rank === 3) return "text-orange-500";
-    return "text-text";
-  };
 
   const handleUpdateNetWorth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,7 +87,7 @@ export default function DashboardPage() {
           <div className="bg-background-lighter border border-border rounded-lg p-6 mb-6">
             <p className="text-text-muted text-sm mb-1">Welcome back,</p>
             <p className="text-2xl font-bold font-display text-accent">
-              {user.username}
+              @{user.username}
             </p>
           </div>
 
@@ -104,7 +98,7 @@ export default function DashboardPage() {
               initial={user.username.charAt(0).toUpperCase()}
             />
             <h1 className="text-2xl font-bold font-display mt-4">
-              {user.username}
+              @{user.username}
             </h1>
             <p className="text-text-muted text-sm mt-2">{user.phone}</p>
           </div>
@@ -131,7 +125,15 @@ export default function DashboardPage() {
           <div className="bg-background-lighter border border-border rounded-lg p-6 text-center mb-6">
             <p className="text-text-muted text-sm mb-2">Net Worth</p>
             <p className="text-4xl font-bold font-display text-accent">
-              {formatNetWorth(user.netWorth)}
+              {(() => {
+                const nw = formatNetWorthWithCents(user.netWorth);
+                return (
+                  <>
+                    {nw.dollars}
+                    <span className="text-text-muted text-2xl">{nw.cents}</span>
+                  </>
+                );
+              })()}
             </p>
           </div>
 

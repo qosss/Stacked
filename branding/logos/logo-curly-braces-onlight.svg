@@ -1,0 +1,13 @@
+<svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- {STACKED} - Curly Braces Logo - Light Background Version -->
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&amp;display=swap');
+    </style>
+  </defs>
+  
+  <!-- Logo Text -->
+  <text x="20" y="62" font-family="'JetBrains Mono', monospace" font-size="42" font-weight="600" letter-spacing="0.02em">
+    <tspan fill="#0d0d0d">{</tspan><tspan fill="#0d0d0d">STACKED</tspan><tspan fill="#0d0d0d">}</tspan>
+  </text>
+</svg>

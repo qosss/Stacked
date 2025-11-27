@@ -14,7 +14,7 @@ interface ModalProps {
 export function Modal({ isOpen, onClose, children, className }: ModalProps) {
   React.useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && isOpen) {
         onClose();
       }
     };
@@ -34,24 +34,20 @@ export function Modal({ isOpen, onClose, children, className }: ModalProps) {
   }
 
   return (
-    <FocusTrap>
+    <FocusTrap
+      focusTrapOptions={{
+        initialFocus: false,
+        allowOutsideClick: false,
+        escapeDeactivates: false,
+      }}
+    >
       <div
-        className={cn(
-          "fixed inset-0 z-50 flex items-center justify-center transition-all duration-300",
-          isOpen
-            ? "opacity-100 visible bg-black/85 backdrop-blur-sm"
-            : "opacity-0 invisible"
-        )}
+        className="fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 opacity-100 visible bg-black/85 backdrop-blur-sm"
         onClick={onClose}
         role="presentation"
       >
         <div
-          className={cn(
-            "relative transition-all duration-300",
-            isOpen
-              ? "translate-y-0 scale-100 opacity-100"
-              : "translate-y-5 scale-95 opacity-0"
-          )}
+          className="relative transition-all duration-300 translate-y-0 scale-100 opacity-100"
           onClick={(e) => e.stopPropagation()}
           role="dialog"
           aria-modal="true"

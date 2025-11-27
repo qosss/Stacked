@@ -6,7 +6,11 @@
       "Bash(cat:*)",
       "Bash(git add:*)",
       "Bash(npm install:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npx tailwindcss --help:*)",
+      "Bash(find:*)",
+      "Bash(git push)"
     ],
     "deny": [],
     "ask": []

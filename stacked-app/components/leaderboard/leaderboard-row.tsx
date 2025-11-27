@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { User, formatNetWorth, getUserRank } from "@/lib/data/users";
+import { User, getUserRank } from "@/lib/data/users";
+import { getRankColor, formatNetWorthWithCents } from "@/lib/utils";
 import { Tag } from "@/components/ui/tag";
 import { Avatar } from "@/components/ui/avatar";
 
@@ -19,13 +20,6 @@ export function LeaderboardRow({
   variants,
 }: LeaderboardRowProps) {
   const rank = getUserRank(user.id);
-
-  const getRankColor = (rank: number) => {
-    if (rank === 1) return "text-accent";
-    if (rank === 2) return "text-gray-400";
-    if (rank === 3) return "text-orange-500";
-    return "text-text-muted";
-  };
 
   const handleClick = () => {
     if (onProfile) {
@@ -52,13 +46,23 @@ export function LeaderboardRow({
             <Avatar size="sm" initial={user.username.charAt(0).toUpperCase()} />
           </div>
           <div>
-            <p className="font-medium text-text">{user.username}</p>
+            <p className="font-medium text-text">@{user.username}</p>
             <p className="text-xs text-text-muted">{user.phone}</p>
           </div>
         </div>
       </td>
       <td className="px-6 py-4 text-right">
-        <p className="font-bold text-accent">{formatNetWorth(user.netWorth)}</p>
+        <p className="font-bold text-accent">
+          {(() => {
+            const nw = formatNetWorthWithCents(user.netWorth);
+            return (
+              <>
+                {nw.dollars}
+                <span className="text-text-muted text-sm">{nw.cents}</span>
+              </>
+            );
+          })()}
+        </p>
       </td>
       <td className="hidden md:table-cell px-6 py-4 text-right">
         <div className="flex justify-end gap-2">

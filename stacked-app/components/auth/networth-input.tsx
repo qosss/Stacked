@@ -66,7 +66,7 @@ export function NetWorthInput({
           onChange={handleChange}
           disabled={disabled}
           aria-required="true"
-          aria-invalid={value && !isValid}
+          aria-invalid={value && !isValid ? "true" : "false"}
           aria-describedby={helperId + (value && !isValid ? ` ${errorId}` : "")}
           className={`pl-7 ${
             value && !isValid ? "border-red-500" : isValid ? "border-accent" : ""

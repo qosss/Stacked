@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- App Icon: [S] Brackets on Lime - 512px -->
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&amp;display=swap');
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" rx="112" fill="#c8ff00"/>
+  
+  <!-- Brackets Icon -->
+  <text x="256" y="330" font-family="'JetBrains Mono', monospace" font-size="160" font-weight="700" fill="#0a0a0a" text-anchor="middle">[S]</text>
+</svg>

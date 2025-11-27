@@ -1,6 +1,7 @@
 "use client";
 
-import { User, formatNetWorth, getUserRank } from "@/lib/data/users";
+import { User, getUserRank } from "@/lib/data/users";
+import { formatNetWorthWithCents } from "@/lib/utils";
 import { Modal } from "@/components/ui/modal";
 import { Avatar } from "@/components/ui/avatar";
 import { Tag } from "@/components/ui/tag";
@@ -20,7 +21,7 @@ export function ProfileModal({ user, onClose }: ProfileModalProps) {
         <div className="flex flex-col items-center mb-6">
           <Avatar size="lg" initial={user.username.charAt(0).toUpperCase()} />
           <h2 className="text-2xl font-bold font-display mt-4">
-            {user.username}
+            @{user.username}
           </h2>
           <p className="text-sm text-text-muted mt-1">{user.phone}</p>
         </div>
@@ -29,7 +30,15 @@ export function ProfileModal({ user, onClose }: ProfileModalProps) {
           <div className="flex justify-between items-center mb-4">
             <span className="text-text-muted text-sm">Net Worth</span>
             <span className="text-2xl font-bold text-accent">
-              {formatNetWorth(user.netWorth)}
+              {(() => {
+                const nw = formatNetWorthWithCents(user.netWorth);
+                return (
+                  <>
+                    {nw.dollars}
+                    <span className="text-text-muted text-lg">{nw.cents}</span>
+                  </>
+                );
+              })()}
             </span>
           </div>
           <div className="flex justify-between items-center">
@@ -49,7 +58,7 @@ export function ProfileModal({ user, onClose }: ProfileModalProps) {
 
         <Link
           href={`/u/${user.username}`}
-          className="block w-full text-center bg-accent text-background font-bold py-2 rounded hover:opacity-90 transition-opacity"
+          className="block w-full text-center bg-accent text-text-inverse font-bold py-2 rounded hover:opacity-90 transition-opacity"
         >
           View Full Profile
         </Link>

@@ -1,4 +1,7 @@
+"use client";
+
 import { getUserByUsername, getUserRank, formatNetWorth } from "@/lib/data/users";
+import { getRankColor, formatNetWorthWithCents } from "@/lib/utils";
 import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
 import { Tag } from "@/components/ui/tag";
@@ -38,13 +41,6 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
   const rank = getUserRank(user.id);
 
-  const getRankColor = (rank: number) => {
-    if (rank === 1) return "text-accent";
-    if (rank === 2) return "text-gray-400";
-    if (rank === 3) return "text-orange-500";
-    return "text-text";
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-background-deep">
       <header className="border-b border-border p-6">
@@ -63,7 +59,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
               initial={user.username.charAt(0).toUpperCase()}
             />
             <h1 className="text-3xl font-bold font-display mt-4">
-              {user.username}
+              @{user.username}
             </h1>
             <p className="text-text-muted text-sm mt-2">{user.phone}</p>
           </div>
@@ -90,7 +86,15 @@ export default function ProfilePage({ params }: ProfilePageProps) {
           <div className="bg-background-lighter border border-border rounded-lg p-6 text-center mb-6">
             <p className="text-text-muted text-sm mb-2">Net Worth</p>
             <p className="text-4xl font-bold font-display text-accent">
-              {formatNetWorth(user.netWorth)}
+              {(() => {
+                const nw = formatNetWorthWithCents(user.netWorth);
+                return (
+                  <>
+                    {nw.dollars}
+                    <span className="text-text-muted text-2xl">{nw.cents}</span>
+                  </>
+                );
+              })()}
             </p>
           </div>
 
@@ -115,7 +119,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
           <div className="space-y-2">
             <Link
               href="/"
-              className="block w-full text-center bg-accent text-background font-bold py-2 rounded hover:opacity-90 transition-opacity"
+              className="block w-full text-center bg-accent text-text-inverse font-bold py-2 rounded hover:opacity-90 transition-opacity"
             >
               Back to Leaderboard
             </Link>

@@ -64,7 +64,7 @@ export function UsernameInput({
           disabled={disabled}
           maxLength={20}
           aria-required="true"
-          aria-invalid={hasError}
+          aria-invalid={hasError ? "true" : "false"}
           aria-describedby={helperId + (hasError ? ` ${errorId}` : "")}
           className={`pr-10 ${
             hasError ? "border-red-500" : isValid ? "border-accent" : ""
