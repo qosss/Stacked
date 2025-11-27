@@ -112,7 +112,7 @@ type ToastActionOrReactNode =
   | ToastActionElement
   | React.ReactNode;
 
-interface Toast {
+interface ToastProps {
   id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
@@ -124,7 +124,7 @@ interface Toast {
 }
 
 export {
-  type Toast,
+  type ToastProps,
   type ToastActionOrReactNode,
   ToastProvider,
   ToastViewport,
