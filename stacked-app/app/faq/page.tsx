@@ -4,11 +4,6 @@ import { StaticPageLayout } from "@/components/static/static-page-layout";
 import { Accordion } from "@/components/static/accordion";
 import { PageTransition } from "@/components/ui/page-transition";
 
-export const metadata = {
-  title: "FAQ | STACKED",
-  description: "Frequently asked questions about STACKED.",
-};
-
 const faqItems = [
   {
     question: "What is STACKED?",

@@ -46,3 +46,33 @@ export function getRankColor(rank: number): string {
   if (rank === 3) return "text-rank-bronze";
   return "text-text-muted";
 }
+
+/**
+ * Format net worth in compact form for leaderboard
+ * e.g., $15.321M, $500.25K, $12,000
+ */
+export function formatNetWorthCompact(value: number): string {
+  const isNegative = value < 0;
+  const absValue = Math.abs(value);
+  const sign = isNegative ? "-" : "";
+
+  if (absValue >= 1000000) {
+    // Millions: $15.321M
+    const millions = absValue / 1000000;
+    return `${sign}$${millions.toFixed(3)}M`;
+  } else if (absValue >= 1000) {
+    // Thousands: $500.25K or just show full number for smaller values
+    const thousands = absValue / 1000;
+    if (absValue >= 100000) {
+      return `${sign}$${thousands.toFixed(2)}K`;
+    } else if (absValue >= 10000) {
+      return `${sign}$${thousands.toFixed(2)}K`;
+    } else {
+      // Under 10K, show full number
+      return `${sign}$${absValue.toLocaleString("en-US")}`;
+    }
+  } else {
+    // Under 1000
+    return `${sign}$${absValue.toLocaleString("en-US")}`;
+  }
+}

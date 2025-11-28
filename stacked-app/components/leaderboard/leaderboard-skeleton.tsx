@@ -22,7 +22,7 @@ export function LeaderboardSkeleton() {
                 Net Worth
               </th>
               <th className="px-6 py-3 text-right text-xs font-bold text-text-muted uppercase tracking-wider w-24">
-                Tags
+                Badges
               </th>
             </tr>
           </thead>

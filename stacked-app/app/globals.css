@@ -48,6 +48,35 @@
     min-height: 100vh;
   }
 
+  /* Custom scrollbar styling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #333333 #141414;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #141414;
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: #444444;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: #141414;
+  }
+
   /* Subtle noise texture overlay */
   body::before {
     content: '';

@@ -1,31 +1,30 @@
 "use client";
 
+import { use } from "react";
 import { getUserByUsername, getUserRank, formatNetWorth } from "@/lib/data/users";
 import { getRankColor, formatNetWorthWithCents } from "@/lib/utils";
 import Link from "next/link";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import { Avatar } from "@/components/ui/avatar";
-import { Tag } from "@/components/ui/tag";
+import { Badge } from "@/components/ui/badge";
 import { PageTransition } from "@/components/ui/page-transition";
 import { ProfileSkeleton } from "@/components/profile/profile-skeleton";
 
 interface ProfilePageProps {
-  params: {
+  params: Promise<{
     username: string;
-  };
+  }>;
 }
 
 export default function ProfilePage({ params }: ProfilePageProps) {
-  const { username } = params;
+  const { username } = use(params);
   const user = getUserByUsername(username);
 
   if (!user) {
     return (
       <div className="min-h-screen flex flex-col bg-background-deep">
-        <header className="border-b border-border p-6">
-          <Link href="/" className="font-display text-2xl font-bold">
-            STACKED
-          </Link>
-        </header>
+        <Header />
         <main className="flex-1 flex items-center justify-center px-6 py-12">
           <div className="text-center">
             <h1 className="text-3xl font-bold font-display mb-2">User Not Found</h1>
@@ -43,11 +42,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
   return (
     <div className="min-h-screen flex flex-col bg-background-deep">
-      <header className="border-b border-border p-6">
-        <Link href="/" className="font-display text-2xl font-bold">
-          STACKED
-        </Link>
-      </header>
+      <Header />
 
       <PageTransition>
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
@@ -59,9 +54,9 @@ export default function ProfilePage({ params }: ProfilePageProps) {
               initial={user.username.charAt(0).toUpperCase()}
             />
             <h1 className="text-3xl font-bold font-display mt-4">
-              @{user.username}
+              {user.displayName}
             </h1>
-            <p className="text-text-muted text-sm mt-2">{user.phone}</p>
+            <p className="text-text-muted text-sm mt-1">@{user.username}</p>
           </div>
 
           {/* Rank Banner */}
@@ -98,10 +93,10 @@ export default function ProfilePage({ params }: ProfilePageProps) {
             </p>
           </div>
 
-          {/* Tags */}
+          {/* Badges */}
           <div className="flex justify-center gap-2 mb-6">
-            {user.isOG && <Tag variant="og">OG</Tag>}
-            {user.isEarly && <Tag variant="early">Early</Tag>}
+            {user.isOG && <Badge variant="og">OG</Badge>}
+            {user.isEarly && <Badge variant="early">Early</Badge>}
           </div>
 
           {/* Join Date */}
@@ -127,6 +122,8 @@ export default function ProfilePage({ params }: ProfilePageProps) {
           </div>
         </main>
       </PageTransition>
+
+      <Footer />
     </div>
   );
 }

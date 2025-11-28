@@ -16,7 +16,7 @@ export function ProfileSkeleton() {
       {/* Net Worth */}
       <Skeleton className="h-24 w-full rounded-lg mb-6" />
 
-      {/* Tags */}
+      {/* Badges */}
       <div className="flex justify-center gap-2 mb-6">
         <Skeleton className="h-8 w-12 rounded" />
         <Skeleton className="h-8 w-12 rounded" />

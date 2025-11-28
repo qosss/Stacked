@@ -1,8 +1,12 @@
 import Link from "next/link";
+import { Logo } from "@/components/ui/logo";
 
 export function Footer() {
   return (
     <footer className="border-t border-border mt-8 py-8 text-center animate-fade-in">
+      <div className="mb-4">
+        <Logo size="sm" />
+      </div>
       <div className="flex justify-center gap-8 mb-3">
         <Link
           href="/privacy"

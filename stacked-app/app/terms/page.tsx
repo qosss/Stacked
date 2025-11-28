@@ -4,11 +4,6 @@ import { StaticPageLayout } from "@/components/static/static-page-layout";
 import { Section } from "@/components/static/section";
 import { PageTransition } from "@/components/ui/page-transition";
 
-export const metadata = {
-  title: "Terms of Service | STACKED",
-  description: "Terms and conditions for using STACKED.",
-};
-
 export default function TermsPage() {
   return (
     <PageTransition>

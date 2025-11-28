@@ -9,9 +9,11 @@ import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { NetWorthInput } from "@/components/auth/networth-input";
-import { Tag } from "@/components/ui/tag";
+import { Badge } from "@/components/ui/badge";
 import { PageTransition } from "@/components/ui/page-transition";
 import { ProfileSkeleton } from "@/components/profile/profile-skeleton";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -31,11 +33,7 @@ export default function DashboardPage() {
   if (isLoading || !user) {
     return (
       <div className="min-h-screen flex flex-col bg-background-deep">
-        <header className="border-b border-border p-6">
-          <Link href="/" className="font-display text-2xl font-bold">
-            STACKED
-          </Link>
-        </header>
+        <Header />
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
           <ProfileSkeleton />
         </main>
@@ -74,11 +72,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background-deep">
-      <header className="border-b border-border p-6">
-        <Link href="/" className="font-display text-2xl font-bold">
-          STACKED
-        </Link>
-      </header>
+      <Header />
 
       <PageTransition>
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
@@ -137,10 +131,10 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          {/* Tags */}
+          {/* Badges */}
           <div className="flex justify-center gap-2 mb-6">
-            {user.isOG && <Tag variant="og">OG</Tag>}
-            {user.isEarly && <Tag variant="early">Early</Tag>}
+            {user.isOG && <Badge variant="og">OG</Badge>}
+            {user.isEarly && <Badge variant="early">Early</Badge>}
           </div>
 
           {/* Join Date */}
@@ -190,6 +184,8 @@ export default function DashboardPage() {
         </div>
         </main>
       </PageTransition>
+
+      <Footer />
 
       {/* Update Net Worth Modal */}
       <Modal isOpen={showUpdateModal} onClose={() => setShowUpdateModal(false)}>

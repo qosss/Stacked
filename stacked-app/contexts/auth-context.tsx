@@ -32,6 +32,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
+        // Convert joinedDate string back to Date object
+        if (parsedUser.joinedDate) {
+          parsedUser.joinedDate = new Date(parsedUser.joinedDate);
+        }
         setUser(parsedUser);
       } catch (error) {
         console.error("Failed to parse stored user:", error);

@@ -15,6 +15,7 @@ const config: Config = {
           deep: "#0d0d0d",
           card: "#141414",
           elevated: "#1a1a1a",
+          lighter: "#1a1a1a",
           hover: "#1f1f1f",
         },
         text: {

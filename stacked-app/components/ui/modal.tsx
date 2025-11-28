@@ -9,9 +9,16 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   className?: string;
+  size?: "sm" | "md" | "lg";
 }
 
-export function Modal({ isOpen, onClose, children, className }: ModalProps) {
+const sizeClasses = {
+  sm: "max-w-sm",
+  md: "max-w-sm md:max-w-md",
+  lg: "max-w-sm md:max-w-lg",
+};
+
+export function Modal({ isOpen, onClose, children, className, size = "sm" }: ModalProps) {
   React.useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -62,7 +69,8 @@ export function Modal({ isOpen, onClose, children, className }: ModalProps) {
           </button>
           <div
             className={cn(
-              "bg-background-card border border-border-light rounded-md p-6 sm:p-8 w-full max-w-sm mx-4 sm:mx-0 shadow-2xl",
+              "bg-background-card border border-border-light rounded-md p-6 sm:p-8 w-full mx-4 sm:mx-0 shadow-2xl text-text-primary",
+              sizeClasses[size],
               className
             )}
           >
