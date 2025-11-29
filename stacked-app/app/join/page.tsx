@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation";
 import { PhoneInput } from "@/components/auth/phone-input";
 import { OTPInput } from "@/components/auth/otp-input";
 import { UsernameInput } from "@/components/auth/username-input";
+import { DisplayNameInput } from "@/components/auth/displayname-input";
 import { NetWorthInput } from "@/components/auth/networth-input";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/auth-context";
+import { validateDisplayName } from "@/lib/validation";
 import Link from "next/link";
 
-type SignupStep = "phone" | "otp" | "username" | "networth";
+type SignupStep = "phone" | "otp" | "username" | "displayname" | "networth";
 
 export default function JoinPage() {
   const router = useRouter();
@@ -20,6 +22,7 @@ export default function JoinPage() {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [username, setUsername] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [netWorth, setNetWorth] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +74,20 @@ export default function JoinPage() {
       return;
     }
 
+    // Move to display name step
+    setStep("displayname");
+  };
+
+  const handleDisplayNameSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    const validationError = validateDisplayName(displayName);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     // Move to net worth step
     setStep("networth");
   };
@@ -86,12 +103,12 @@ export default function JoinPage() {
     }
 
     setIsLoading(true);
-    const success = await signup(phone, username, numericValue);
+    const success = await signup(phone, username, displayName, numericValue);
     setIsLoading(false);
 
     if (success) {
-      // Redirect to home
-      router.push("/");
+      // Redirect to verification page
+      router.push("/verify");
     } else {
       setError("Failed to create account. Username or phone may be taken.");
     }
@@ -102,8 +119,10 @@ export default function JoinPage() {
       setStep("phone");
     } else if (step === "username") {
       setStep("otp");
-    } else if (step === "networth") {
+    } else if (step === "displayname") {
       setStep("username");
+    } else if (step === "networth") {
+      setStep("displayname");
     }
     setError("");
   };
@@ -116,8 +135,10 @@ export default function JoinPage() {
         return "2";
       case "username":
         return "3";
-      case "networth":
+      case "displayname":
         return "4";
+      case "networth":
+        return "5";
     }
   };
 
@@ -129,6 +150,8 @@ export default function JoinPage() {
         return "Verify your phone";
       case "username":
         return "Choose a username";
+      case "displayname":
+        return "What's your name?";
       case "networth":
         return "Enter your net worth";
     }
@@ -145,6 +168,9 @@ export default function JoinPage() {
       case "username":
         handleUsernameSubmit(e);
         break;
+      case "displayname":
+        handleDisplayNameSubmit(e);
+        break;
       case "networth":
         handleNetWorthSubmit(e);
         break;
@@ -160,6 +186,8 @@ export default function JoinPage() {
         return "Verify Code";
       case "username":
         return "Next";
+      case "displayname":
+        return "Next";
       case "networth":
         return "Create Account";
     }
@@ -169,9 +197,6 @@ export default function JoinPage() {
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10 bg-background-deep">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="inline-block bg-accent text-text-inverse font-bold rounded-full w-10 h-10 flex items-center justify-center mb-4">
-            {getStepNumber()}
-          </div>
           <h1 className="font-display text-3xl font-bold mb-2">Join STACKED</h1>
           <p className="text-text-muted text-sm">{getStepTitle()}</p>
         </div>
@@ -182,25 +207,21 @@ export default function JoinPage() {
           )}
 
           {step === "otp" && (
-            <>
-              <OTPInput value={otp} onChange={setOtp} disabled={isLoading} />
-              <button
-                type="button"
-                onClick={() => {
-                  setStep("phone");
-                  setError("");
-                }}
-                className="w-full text-sm text-accent hover:opacity-80 transition-opacity"
-              >
-                ← Change phone number
-              </button>
-            </>
+            <OTPInput value={otp} onChange={setOtp} disabled={isLoading} />
           )}
 
           {step === "username" && (
             <UsernameInput
               value={username}
               onChange={setUsername}
+              disabled={isLoading}
+            />
+          )}
+
+          {step === "displayname" && (
+            <DisplayNameInput
+              value={displayName}
+              onChange={setDisplayName}
               disabled={isLoading}
             />
           )}

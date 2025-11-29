@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Modal } from "@/components/ui/modal";
+import { Logo } from "@/components/ui/logo";
 import { PhoneInput } from "@/components/auth/phone-input";
 import { OTPInput } from "@/components/auth/otp-input";
 import { Button } from "@/components/ui/button";
@@ -82,27 +83,15 @@ export function LoginModal({
     setError("");
   };
 
-  // Step indicators (2 dots)
-  const StepIndicators = () => (
-    <div className="flex justify-center gap-2 mb-6">
-      <div
-        className={`w-2 h-2 rounded-full transition-colors ${
-          step === "phone" ? "bg-accent" : "bg-border-light"
-        }`}
-      />
-      <div
-        className={`w-2 h-2 rounded-full transition-colors ${
-          step === "otp" ? "bg-accent" : "bg-border-light"
-        }`}
-      />
-    </div>
-  );
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
+      {/* Logo */}
+      <div className="flex justify-center mb-6">
+        <Logo size="sm" />
+      </div>
+
       <div className="text-center mb-6">
         <h1 className="font-display text-3xl font-bold mb-2">Welcome Back</h1>
-        <StepIndicators />
         <p className="text-text-muted text-sm">
           {step === "phone"
             ? "Enter your phone to log in"

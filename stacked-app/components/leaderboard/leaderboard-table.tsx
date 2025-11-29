@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/auth-context";
 import { Select } from "@/components/ui/select";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { RankChangeIndicator } from "@/components/ui/rank-change-indicator";
 
 type SortBy = "high-low" | "low-high" | "recent";
 
@@ -86,15 +87,16 @@ export function LeaderboardTable() {
                 initial={currentUser.username.charAt(0).toUpperCase()}
               />
               <div>
-                <div className="flex items-center gap-2">
-                  <p className="font-bold text-text">@{currentUser.username}</p>
-                  <Badge variant="you">You</Badge>
-                </div>
-                <p className="text-sm text-text-muted">Your position on the leaderboard</p>
+                <p className="font-bold text-text">
+                  {currentUser.displayName}
+                  <Badge variant="you" className="ml-2 align-middle">You</Badge>
+                </p>
+                <p className="text-sm text-text-muted">@{currentUser.username}</p>
               </div>
             </div>
             <div className="text-right">
               <p className={`text-3xl font-bold font-display ${getRankColor(currentUserRank)}`}>
+                <RankChangeIndicator currentRank={currentUserRank} previousRank={currentUser.previousRank} size="md" />
                 #{currentUserRank}
               </p>
               <p className="text-lg font-bold text-accent">
@@ -136,17 +138,14 @@ export function LeaderboardTable() {
           <table className="w-full table-fixed">
             <thead className="border-b border-border sticky top-0 z-10">
               <tr>
-                <th className="bg-background-lighter px-6 py-3 text-left text-xs font-bold text-text-muted uppercase tracking-wider w-20">
+                <th className="bg-background-lighter px-4 py-3 text-left text-xs font-bold text-text-muted uppercase tracking-wider w-24">
                   Rank
                 </th>
                 <th className="bg-background-lighter px-6 py-3 text-left text-xs font-bold text-text-muted uppercase tracking-wider">
                   Member
                 </th>
-                <th className="bg-background-lighter px-6 py-3 text-right text-xs font-bold text-text-muted uppercase tracking-wider w-32">
+                <th className="bg-background-lighter px-6 py-3 text-right text-xs font-bold text-text-muted uppercase tracking-wider w-28 md:w-44">
                   Net Worth
-                </th>
-                <th className="bg-background-lighter hidden md:table-cell px-6 py-3 text-right text-xs font-bold text-text-muted uppercase tracking-wider w-28">
-                  Badges
                 </th>
               </tr>
             </thead>

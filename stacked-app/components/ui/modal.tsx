@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 import FocusTrap from "focus-trap-react";
 
@@ -15,7 +16,7 @@ interface ModalProps {
 const sizeClasses = {
   sm: "max-w-sm",
   md: "max-w-sm md:max-w-md",
-  lg: "max-w-sm md:max-w-lg",
+  lg: "max-w-sm md:max-w-2xl",
 };
 
 export function Modal({ isOpen, onClose, children, className, size = "sm" }: ModalProps) {
@@ -36,11 +37,17 @@ export function Modal({ isOpen, onClose, children, className, size = "sm" }: Mod
     }
   }, [isOpen, onClose]);
 
-  if (!isOpen) {
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) {
     return null;
   }
 
-  return (
+  return createPortal(
     <FocusTrap
       focusTrapOptions={{
         initialFocus: false,
@@ -54,30 +61,31 @@ export function Modal({ isOpen, onClose, children, className, size = "sm" }: Mod
         role="presentation"
       >
         <div
-          className="relative transition-all duration-300 translate-y-0 scale-100 opacity-100"
+          className="transition-all duration-300 translate-y-0 scale-100 opacity-100"
           onClick={(e) => e.stopPropagation()}
           role="dialog"
           aria-modal="true"
           aria-label="Modal dialog"
         >
-          <button
-            onClick={onClose}
-            className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-background-elevated border border-border-light text-text-muted hover:bg-background-hover hover:text-text-primary hover:rotate-90 transition-all duration-200 flex items-center justify-center text-lg font-bold"
-            aria-label="Close modal"
-          >
-            ×
-          </button>
           <div
             className={cn(
-              "bg-background-card border border-border-light rounded-md p-6 sm:p-8 w-full mx-4 sm:mx-0 shadow-2xl text-text-primary",
+              "relative bg-background-card border border-border-light rounded-md p-4 sm:p-6 md:p-8 w-[85vw] sm:w-full my-4 shadow-2xl text-text-primary",
               sizeClasses[size],
               className
             )}
           >
+            <button
+              onClick={onClose}
+              className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-background-elevated border border-border-light text-text-muted hover:bg-background-hover hover:text-text-primary hover:rotate-90 transition-all duration-200 flex items-center justify-center text-lg font-bold z-10"
+              aria-label="Close modal"
+            >
+              ×
+            </button>
             {children}
           </div>
         </div>
       </div>
-    </FocusTrap>
+    </FocusTrap>,
+    document.body
   );
 }

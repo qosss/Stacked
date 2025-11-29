@@ -7,7 +7,13 @@ export interface User {
   joinedDate: Date;
   isOG?: boolean;
   isEarly?: boolean;
+  isVerified?: boolean;
   rank?: number;
+  previousRank?: number;
+  socialX?: string;
+  socialInstagram?: string;
+  socialLinkedIn?: string;
+  bio?: string;
 }
 
 export const formatNetWorth = (value: number): string => {
@@ -66,6 +72,67 @@ const generateMockUsers = (): User[] => {
     const variation = ((i * 7919) % 10000); // Deterministic pseudo-random using prime number
     const netWorth = Math.max(10000, baseNetWorth - (i * decrement) + variation);
 
+    // Add previousRank for some users to show rank changes
+    // Pattern: some moved up, some moved down, some are new (no previousRank)
+    let previousRank: number | undefined;
+    if (i === 0) {
+      previousRank = 3; // #1 was #3 (moved up 2)
+    } else if (i === 1) {
+      previousRank = 1; // #2 was #1 (moved down 1)
+    } else if (i === 2) {
+      previousRank = 7; // #3 was #7 (moved up 4)
+    } else if (i === 3) {
+      previousRank = 2; // #4 was #2 (moved down 2)
+    } else if (i === 5) {
+      previousRank = 12; // #6 was #12 (moved up 6)
+    } else if (i === 7) {
+      previousRank = 5; // #8 was #5 (moved down 3)
+    } else if (i === 9) {
+      previousRank = 15; // #10 was #15 (moved up 5)
+    } else if (i === 14) {
+      previousRank = 10; // #15 was #10 (moved down 5)
+    } else if (i === 19) {
+      previousRank = 25; // #20 was #25 (moved up 5)
+    } else if (i === 24) {
+      previousRank = 20; // #25 was #20 (moved down 5)
+    } else if (i === 4 || i === 6 || i === 10 || i === 15 || i === 20) {
+      previousRank = i + 1; // Same rank - no change (shows dot)
+    }
+    // Other users have no previousRank (show nothing in leaderboard)
+
+    // Add social links to some users for testing
+    let socialX: string | undefined;
+    let socialInstagram: string | undefined;
+    let socialLinkedIn: string | undefined;
+    let bio: string | undefined;
+    if (i === 0) {
+      socialX = "alexchen";
+      socialInstagram = "alex.chen";
+      socialLinkedIn = "alexchen";
+      bio = "Building wealth one day at a time. Tech entrepreneur & investor.";
+    } else if (i === 1) {
+      socialX = "sarahdev";
+      socialLinkedIn = "sarahdev";
+      bio = "Software engineer turned investor. Love startups.";
+    } else if (i === 2) {
+      socialInstagram = "jordanvault";
+      bio = "Finance nerd. Early crypto adopter.";
+    } else if (i === 3) {
+      socialX = "markbuilder";
+      socialInstagram = "mark_builder";
+      socialLinkedIn = "markbuilder";
+    } else if (i === 5) {
+      socialX = "lisatech";
+      bio = "Venture capital & angel investing.";
+    } else if (i === 8) {
+      socialInstagram = "chrisgrind";
+      socialLinkedIn = "chrisgrind";
+    } else if (i === 12) {
+      socialX = "james_codes";
+      socialInstagram = "james.codes";
+      bio = "Full-stack dev. Building my way to financial freedom.";
+    }
+
     users.push({
       id: String(i + 1),
       username,
@@ -76,6 +143,11 @@ const generateMockUsers = (): User[] => {
       isOG: i < 10, // First 10 are OG
       isEarly: i >= 10 && i < 25, // Next 15 are Early
       rank: i + 1,
+      previousRank,
+      socialX,
+      socialInstagram,
+      socialLinkedIn,
+      bio,
     });
   }
 

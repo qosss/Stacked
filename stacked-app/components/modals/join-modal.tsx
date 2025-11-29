@@ -1,14 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Modal } from "@/components/ui/modal";
+import { Logo } from "@/components/ui/logo";
 import { PhoneInput } from "@/components/auth/phone-input";
 import { OTPInput } from "@/components/auth/otp-input";
 import { UsernameInput } from "@/components/auth/username-input";
+import { DisplayNameInput } from "@/components/auth/displayname-input";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/auth-context";
+import { validateDisplayName } from "@/lib/validation";
 
-type SignupStep = "phone" | "otp" | "username";
+type SignupStep = "phone" | "otp" | "username" | "displayname";
 
 interface JoinModalProps {
   isOpen: boolean;
@@ -21,12 +25,14 @@ export function JoinModal({
   onClose,
   onSwitchToLogin,
 }: JoinModalProps) {
+  const router = useRouter();
   const { signup } = useAuth();
 
   const [step, setStep] = useState<SignupStep>("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [username, setUsername] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,6 +43,7 @@ export function JoinModal({
       setPhone("");
       setOtp("");
       setUsername("");
+      setDisplayName("");
       setError("");
       setIsLoading(false);
     }
@@ -83,14 +90,29 @@ export function JoinModal({
       return;
     }
 
+    // Move to display name step
+    setStep("displayname");
+  };
+
+  const handleDisplayNameSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    const validationError = validateDisplayName(displayName);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     // Create account with netWorth = 0 (user will set it later in /me)
     setIsLoading(true);
-    const success = await signup(phone, username, 0);
+    const success = await signup(phone, username, displayName, 0);
     setIsLoading(false);
 
     if (success) {
-      // Close modal on successful signup
+      // Close modal and redirect to verification page
       onClose();
+      router.push("/verify");
     } else {
       setError("Failed to create account. Username or phone may be taken.");
     }
@@ -101,6 +123,8 @@ export function JoinModal({
       setStep("phone");
     } else if (step === "username") {
       setStep("otp");
+    } else if (step === "displayname") {
+      setStep("username");
     }
     setError("");
   };
@@ -113,6 +137,8 @@ export function JoinModal({
         return "2";
       case "username":
         return "3";
+      case "displayname":
+        return "4";
     }
   };
 
@@ -124,6 +150,8 @@ export function JoinModal({
         return "Verify your phone";
       case "username":
         return "Choose a username";
+      case "displayname":
+        return "What's your name?";
     }
   };
 
@@ -134,6 +162,8 @@ export function JoinModal({
       case "otp":
         return "Verify Code";
       case "username":
+        return "Next";
+      case "displayname":
         return "Create Account";
     }
   };
@@ -149,20 +179,20 @@ export function JoinModal({
       case "username":
         handleUsernameSubmit(e);
         break;
+      case "displayname":
+        handleDisplayNameSubmit(e);
+        break;
     }
   };
 
-  // Step number badge
-  const StepBadge = () => (
-    <div className="inline-block bg-accent text-text-inverse font-bold rounded-full w-10 h-10 flex items-center justify-center mb-4">
-      {getStepNumber()}
-    </div>
-  );
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
+      {/* Logo */}
+      <div className="flex justify-center mb-6">
+        <Logo size="sm" />
+      </div>
+
       <div className="text-center mb-8">
-        <StepBadge />
         <h1 className="font-display text-3xl font-bold mb-2">Join STACKED</h1>
         <p className="text-text-muted text-sm">{getStepTitle()}</p>
       </div>
@@ -173,25 +203,21 @@ export function JoinModal({
         )}
 
         {step === "otp" && (
-          <>
-            <OTPInput value={otp} onChange={setOtp} disabled={isLoading} />
-            <button
-              type="button"
-              onClick={() => {
-                setStep("phone");
-                setError("");
-              }}
-              className="w-full text-sm text-accent hover:opacity-80 transition-opacity"
-            >
-              ← Change phone number
-            </button>
-          </>
+          <OTPInput value={otp} onChange={setOtp} disabled={isLoading} />
         )}
 
         {step === "username" && (
           <UsernameInput
             value={username}
             onChange={setUsername}
+            disabled={isLoading}
+          />
+        )}
+
+        {step === "displayname" && (
+          <DisplayNameInput
+            value={displayName}
+            onChange={setDisplayName}
             disabled={isLoading}
           />
         )}

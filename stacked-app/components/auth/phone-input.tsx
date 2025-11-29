@@ -180,7 +180,7 @@ export function PhoneInput({ value, onChange, disabled }: PhoneInputProps) {
       <div className="relative" ref={dropdownRef}>
         <div
           className={cn(
-            "flex w-full bg-background-deep border border-border rounded-sm font-mono text-sm transition-all duration-200",
+            "flex w-full bg-background-deep border border-border rounded-sm font-mono text-base transition-all duration-200",
             isFocused && "border-accent shadow-[0_0_0_3px_rgba(200,255,0,0.1)]",
             !isFocused && "hover:border-border-light",
             disabled && "opacity-50 cursor-not-allowed"
@@ -237,7 +237,7 @@ export function PhoneInput({ value, onChange, disabled }: PhoneInputProps) {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search countries..."
-                  className="w-full bg-background-deep border border-border rounded-sm pl-8 pr-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent"
+                  className="w-full bg-background-deep border border-border rounded-sm pl-8 pr-3 py-2 text-base text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent"
                 />
               </div>
             </div>

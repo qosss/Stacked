@@ -6,6 +6,10 @@ import { Modal } from "@/components/ui/modal";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/ui/logo";
+import { RankChangeIndicator } from "@/components/ui/rank-change-indicator";
+import { XLogo } from "@/components/ui/x-logo";
+import { InstagramLogo } from "@/components/ui/instagram-logo";
+import { LinkedInLogo } from "@/components/ui/linkedin-logo";
 import Link from "next/link";
 
 interface ProfileModalProps {
@@ -19,8 +23,8 @@ export function ProfileModal({ user, onClose }: ProfileModalProps) {
   return (
     <Modal isOpen={true} onClose={onClose} size="lg">
       <div className="w-full">
-        {/* Logo - hidden on desktop */}
-        <div className="flex justify-center mb-6 md:hidden">
+        {/* Logo */}
+        <div className="flex justify-center mb-6">
           <Logo size="sm" />
         </div>
 
@@ -30,14 +34,55 @@ export function ProfileModal({ user, onClose }: ProfileModalProps) {
           <div className="text-center md:text-left mt-4 md:mt-0 md:flex-1">
             <h2 className="text-2xl md:text-3xl font-bold font-display">
               {user.displayName}
+              {user.isVerified && <Badge variant="verified" className="ml-2 align-middle">Verified</Badge>}
+              {user.isOG && <Badge variant="og" className="ml-2 align-middle">OG</Badge>}
+              {user.isEarly && <Badge variant="early" className="ml-2 align-middle">Early</Badge>}
             </h2>
             <p className="text-text-muted text-sm">@{user.username}</p>
 
-            {/* Badges */}
-            <div className="flex gap-2 mt-2 justify-center md:justify-start">
-              {user.isOG && <Badge variant="og">OG</Badge>}
-              {user.isEarly && <Badge variant="early">Early</Badge>}
-            </div>
+            {/* Bio */}
+            {user.bio && (
+              <p className="text-text text-sm italic mt-2">&ldquo;{user.bio}&rdquo;</p>
+            )}
+
+            {/* Social Links */}
+            {(user.socialX || user.socialInstagram || user.socialLinkedIn) && (
+              <div className="flex gap-3 mt-2 justify-center md:justify-start">
+                {user.socialX && (
+                  <a
+                    href={`https://x.com/${user.socialX}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-text transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <XLogo className="h-4 w-4" />
+                  </a>
+                )}
+                {user.socialInstagram && (
+                  <a
+                    href={`https://instagram.com/${user.socialInstagram}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-text transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <InstagramLogo className="h-4 w-4" />
+                  </a>
+                )}
+                {user.socialLinkedIn && (
+                  <a
+                    href={`https://linkedin.com/in/${user.socialLinkedIn}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-text transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <LinkedInLogo className="h-4 w-4" />
+                  </a>
+                )}
+              </div>
+            )}
 
             {/* Join Date - shown inline on desktop */}
             <p className="text-xs text-text-muted mt-3 hidden md:block">
@@ -65,6 +110,7 @@ export function ProfileModal({ user, onClose }: ProfileModalProps) {
             } rounded-lg p-4 md:p-5 text-center`}
           >
             <p className={`text-3xl md:text-4xl font-bold ${getRankColor(rank)}`}>
+              <RankChangeIndicator currentRank={rank} previousRank={user.previousRank} size="md" />
               #{rank}
             </p>
             <p className="text-text-muted text-xs mt-1">Global Rank</p>

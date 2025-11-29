@@ -9,6 +9,7 @@ const badgeVariants = cva(
         og: "bg-[#332d00] text-rank-gold",
         early: "bg-accent-dim text-accent",
         you: "bg-accent text-text-inverse",
+        verified: "bg-positive/20 text-positive",
       },
     },
     defaultVariants: {

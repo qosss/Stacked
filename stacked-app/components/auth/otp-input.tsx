@@ -15,7 +15,8 @@ export function OTPInput({ value, onChange, disabled }: OTPInputProps) {
     if (!/^\d*$/.test(val)) return;
 
     const newValue = value.split("");
-    newValue[index] = val;
+    // Take only the last character to handle override when box already has a value
+    newValue[index] = val.slice(-1);
     const otpString = newValue.join("").slice(0, 6);
 
     onChange(otpString);
@@ -30,6 +31,7 @@ export function OTPInput({ value, onChange, disabled }: OTPInputProps) {
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (e.key === "Backspace") {
+      e.preventDefault();
       const newValue = value.split("");
       newValue[index] = "";
       onChange(newValue.join(""));
@@ -62,6 +64,8 @@ export function OTPInput({ value, onChange, disabled }: OTPInputProps) {
               inputRefs.current[index] = el;
             }}
             type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             maxLength={1}
             value={value[index] || ""}
             onChange={(e) => handleChange(index, e.target.value)}

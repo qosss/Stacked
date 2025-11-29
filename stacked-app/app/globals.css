@@ -48,6 +48,13 @@
     min-height: 100vh;
   }
 
+  /* Prevent double-tap zoom on interactive elements */
+  button,
+  a,
+  [role="button"] {
+    touch-action: manipulation;
+  }
+
   /* Custom scrollbar styling */
   * {
     scrollbar-width: thin;
@@ -168,6 +175,21 @@
     }
   }
 
+  @keyframes logo-rise-glow {
+    0% {
+      text-shadow: 0 0 0px rgba(212, 255, 0, 0);
+    }
+    40% {
+      text-shadow:
+        0 0 20px rgba(212, 255, 0, 0.8),
+        0 0 40px rgba(212, 255, 0, 0.6),
+        0 0 60px rgba(212, 255, 0, 0.4);
+    }
+    100% {
+      text-shadow: 0 0 0px rgba(212, 255, 0, 0);
+    }
+  }
+
   .animate-fade-in {
     animation: fadeIn 0.4s ease;
   }
@@ -182,5 +204,9 @@
 
   .animate-pulse-glow {
     animation: pulse 2s ease infinite;
+  }
+
+  .animate-logo-rise {
+    animation: logo-rise-glow 1.2s ease-out 0.25s forwards;
   }
 }

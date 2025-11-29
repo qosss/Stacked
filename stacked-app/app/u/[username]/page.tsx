@@ -8,8 +8,12 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { RankChangeIndicator } from "@/components/ui/rank-change-indicator";
 import { PageTransition } from "@/components/ui/page-transition";
 import { ProfileSkeleton } from "@/components/profile/profile-skeleton";
+import { XLogo } from "@/components/ui/x-logo";
+import { InstagramLogo } from "@/components/ui/instagram-logo";
+import { LinkedInLogo } from "@/components/ui/linkedin-logo";
 
 interface ProfilePageProps {
   params: Promise<{
@@ -55,8 +59,55 @@ export default function ProfilePage({ params }: ProfilePageProps) {
             />
             <h1 className="text-3xl font-bold font-display mt-4">
               {user.displayName}
+              {user.isVerified && <Badge variant="verified" className="ml-2 align-middle">Verified</Badge>}
+              {user.isOG && <Badge variant="og" className="ml-2 align-middle">OG</Badge>}
+              {user.isEarly && <Badge variant="early" className="ml-2 align-middle">Early</Badge>}
             </h1>
             <p className="text-text-muted text-sm mt-1">@{user.username}</p>
+
+            {/* Bio */}
+            {user.bio && (
+              <p className="text-text text-sm italic mt-3 max-w-xs mx-auto">&ldquo;{user.bio}&rdquo;</p>
+            )}
+
+            {/* Social Links */}
+            {(user.socialX || user.socialInstagram || user.socialLinkedIn) && (
+              <div className="flex flex-wrap justify-center gap-4 mt-3">
+                {user.socialX && (
+                  <a
+                    href={`https://x.com/${user.socialX}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-text-muted hover:text-text transition-colors"
+                  >
+                    <XLogo className="h-4 w-4" />
+                    <span className="text-sm">@{user.socialX}</span>
+                  </a>
+                )}
+                {user.socialInstagram && (
+                  <a
+                    href={`https://instagram.com/${user.socialInstagram}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-text-muted hover:text-text transition-colors"
+                  >
+                    <InstagramLogo className="h-4 w-4" />
+                    <span className="text-sm">@{user.socialInstagram}</span>
+                  </a>
+                )}
+                {user.socialLinkedIn && (
+                  <a
+                    href={`https://linkedin.com/in/${user.socialLinkedIn}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-text-muted hover:text-text transition-colors"
+                  >
+                    <LinkedInLogo className="h-4 w-4" />
+                    <span className="text-sm">/in/{user.socialLinkedIn}</span>
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Rank Banner */}
@@ -72,6 +123,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
             } rounded-lg p-6 text-center mb-6`}
           >
             <p className={`text-4xl font-bold font-display mb-2 ${getRankColor(rank)}`}>
+              <RankChangeIndicator currentRank={rank} previousRank={user.previousRank} size="md" />
               #{rank}
             </p>
             <p className="text-text-muted text-sm">Global Rank</p>
@@ -91,12 +143,6 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                 );
               })()}
             </p>
-          </div>
-
-          {/* Badges */}
-          <div className="flex justify-center gap-2 mb-6">
-            {user.isOG && <Badge variant="og">OG</Badge>}
-            {user.isEarly && <Badge variant="early">Early</Badge>}
           </div>
 
           {/* Join Date */}
