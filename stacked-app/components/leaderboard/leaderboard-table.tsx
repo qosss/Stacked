@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { User, mockUsers, getUserRank } from "@/lib/data/users";
 import { getRankColor, formatNetWorthWithCents } from "@/lib/utils";
@@ -33,11 +33,15 @@ const rowVariants = {
   },
 };
 
+const ROW_HEIGHT = 88; // Height of each row including gap
+
 export function LeaderboardTable() {
   const { user: currentUser } = useAuth();
   const [sortBy, setSortBy] = useState<SortBy>("high-low");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const userRowRef = useRef<HTMLTableRowElement>(null);
+  const [focusedIndex, setFocusedIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const userRowRef = useRef<HTMLDivElement>(null);
 
   const getSortedUsers = () => {
     const usersCopy = [...mockUsers].slice(0, 100); // Top 100
@@ -63,17 +67,70 @@ export function LeaderboardTable() {
   // Find current user's rank
   const currentUserRank = currentUser ? getUserRank(currentUser.id) : null;
 
+  // Throttled scroll handler using requestAnimationFrame
+  const rafRef = useRef<number | null>(null);
+
+  const handleScroll = useCallback(() => {
+    // Cancel any pending animation frame
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
+
+    // Schedule the calculation on the next frame
+    rafRef.current = requestAnimationFrame(() => {
+      const container = scrollContainerRef.current;
+      if (!container) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const centerY = containerRect.top + containerRect.height / 2;
+
+      const entries = container.querySelectorAll('[data-entry]');
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      entries.forEach((entry, index) => {
+        const rect = entry.getBoundingClientRect();
+        const entryCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(centerY - entryCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      setFocusedIndex(closestIndex);
+    });
+  }, []);
+
+  // Cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
+
   // Scroll to user's position when logged in
   useEffect(() => {
-    if (currentUser && userRowRef.current && sortBy === "high-low") {
-      setTimeout(() => {
-        userRowRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }, 500);
+    if (currentUser && sortBy === "high-low") {
+      const userIndex = sortedUsers.findIndex(u => u.id === currentUser.id);
+      if (userIndex !== -1 && scrollContainerRef.current) {
+        setTimeout(() => {
+          const scrollPosition = userIndex * ROW_HEIGHT;
+          scrollContainerRef.current?.scrollTo({
+            top: scrollPosition,
+            behavior: "smooth",
+          });
+        }, 500);
+      }
     }
-  }, [currentUser, sortBy]);
+  }, [currentUser, sortBy, sortedUsers]);
+
+  // Initial focus calculation
+  useEffect(() => {
+    handleScroll();
+  }, [handleScroll, sortBy]);
 
   return (
     <>
@@ -133,44 +190,49 @@ export function LeaderboardTable() {
         </div>
       </div>
 
-      <div className="border border-border rounded-lg overflow-hidden">
-        <div className="max-h-[600px] overflow-y-auto overflow-x-hidden">
-          <table className="w-full table-fixed">
-            <thead className="border-b border-border sticky top-0 z-10">
-              <tr>
-                <th className="bg-background-lighter px-4 py-3 text-left text-xs font-bold text-text-muted uppercase tracking-wider w-24">
-                  Rank
-                </th>
-                <th className="bg-background-lighter px-6 py-3 text-left text-xs font-bold text-text-muted uppercase tracking-wider">
-                  Member
-                </th>
-                <th className="bg-background-lighter px-6 py-3 text-right text-xs font-bold text-text-muted uppercase tracking-wider w-28 md:w-44">
-                  Net Worth
-                </th>
-              </tr>
-            </thead>
-            <motion.tbody
-              key={sortBy}
-              initial="hidden"
-              animate="visible"
-              variants={containerVariants}
-            >
-              {sortedUsers.map((user) => {
-                const isCurrentUserRow = currentUser?.id === user.id;
-                return (
-                  <LeaderboardRow
-                    key={user.id}
-                    user={user}
-                    isCurrentUser={isCurrentUserRow}
-                    onProfile={setSelectedUser}
-                    variants={rowVariants}
-                    ref={isCurrentUserRow ? userRowRef : undefined}
-                  />
-                );
-              })}
-            </motion.tbody>
-          </table>
-        </div>
+      {/* Carousel Container */}
+      <div
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+          className="h-[320px] overflow-y-auto scroll-smooth scrollbar-hide px-2"
+          style={{ perspective: "1000px" }}
+        >
+          {/* Floating Header */}
+          <div className="sticky top-0 z-20 bg-background-deep/95 backdrop-blur-sm grid grid-cols-[80px_1fr_100px] md:grid-cols-[100px_1fr_160px] px-4 py-3 -mx-2">
+            <span className="text-text-muted text-xs font-bold uppercase tracking-wider text-center">Rank</span>
+            <span className="text-text-muted text-xs font-bold uppercase tracking-wider">Member</span>
+            <span className="text-text-muted text-xs font-bold uppercase tracking-wider text-right">Net Worth</span>
+          </div>
+          {/* Top spacer to allow first item to center */}
+          <div style={{ height: ROW_HEIGHT }} />
+
+          <motion.div
+            key={sortBy}
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            className="flex flex-col gap-2"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {sortedUsers.map((user, index) => {
+              const isCurrentUserRow = currentUser?.id === user.id;
+              return (
+                <LeaderboardRow
+                  key={user.id}
+                  user={user}
+                  isCurrentUser={isCurrentUserRow}
+                  onProfile={setSelectedUser}
+                  variants={rowVariants}
+                  isFocused={index === focusedIndex}
+                  distanceFromFocus={index - focusedIndex}
+                  ref={isCurrentUserRow ? userRowRef : undefined}
+                />
+              );
+            })}
+          </motion.div>
+
+        {/* Bottom spacer to allow last item to center */}
+        <div style={{ height: ROW_HEIGHT }} />
       </div>
 
       {selectedUser && (

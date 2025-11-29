@@ -56,6 +56,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
             <Avatar
               size="lg"
               initial={user.username.charAt(0).toUpperCase()}
+              className="mx-auto"
             />
             <h1 className="text-3xl font-bold font-display mt-4">
               {user.displayName}

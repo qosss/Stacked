@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { PhoneInput } from "@/components/auth/phone-input";
 import { OTPInput } from "@/components/auth/otp-input";
@@ -19,8 +19,13 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      router.push("/me");
+    }
+  }, [user, router]);
+
   if (user) {
-    router.push("/");
     return null;
   }
 

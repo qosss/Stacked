@@ -96,7 +96,7 @@ export function ProfileModal({ user, onClose }: ProfileModalProps) {
         </div>
 
         {/* Stats Row - side by side on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 gap-4 mb-6">
           {/* Rank Banner */}
           <div
             className={`border-2 ${
@@ -109,7 +109,7 @@ export function ProfileModal({ user, onClose }: ProfileModalProps) {
                     : "border-border bg-background-elevated"
             } rounded-lg p-4 md:p-5 text-center`}
           >
-            <p className={`text-3xl md:text-4xl font-bold ${getRankColor(rank)}`}>
+            <p className={`text-3xl md:text-4xl font-bold flex items-center justify-center ${getRankColor(rank)}`}>
               <RankChangeIndicator currentRank={rank} previousRank={user.previousRank} size="md" />
               #{rank}
             </p>

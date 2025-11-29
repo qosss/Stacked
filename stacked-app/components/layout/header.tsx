@@ -153,7 +153,7 @@ export function Header() {
       <div className="md:hidden" />
 
       {/* Desktop Navigation */}
-      <div className={`items-center gap-4 hidden md:flex transition-opacity duration-1000 ease-out ${isScrolled ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+      <div className={`items-center gap-4 hidden md:flex transition-opacity duration-1000 ease-out ${isScrolled && !user ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         {!user ? (
           <>
             <Button
@@ -184,6 +184,12 @@ export function Header() {
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>@{user.username}</DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/" className="cursor-pointer">
+                  <Trophy className="mr-2 h-4 w-4" />
+                  Leaderboard
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/me" className="cursor-pointer">
                   <User className="mr-2 h-4 w-4" />
